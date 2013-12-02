@@ -8,8 +8,24 @@ window.onload = function(){
 	var guess = function(number){
 		console.log("Det hemliga talet: " + secret); // Du når den yttre variabeln secret innifrån funktionen.
 		console.log("Du gissade: " + number); // Detta nummer är det som användaren gissade på.
-			
+		
 		// Plats för förändring.
+		if (number > 100 || number < 0)
+		{
+		    console.log("Gissa på ett tal mellan 0-100!");
+		}
+		else
+		{
+		    if (number < secret) {
+		        console.log("Talet är större än " + number);
+		    }
+		    else if (number > secret) {
+		        console.log("Talet är mindre än " + number);
+		    }
+		    else if (number == secret) {
+		        console.log("Grattis! Du gissade rätt, talet är " + number);
+		    }
+		}
 
 
 		// Returnera exempelvis: 
