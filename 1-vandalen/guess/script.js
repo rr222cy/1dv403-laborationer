@@ -9,15 +9,18 @@ window.onload = function(){
 	var guess = function(number){
 		console.log("Det hemliga talet: " + secret); // Du når den yttre variabeln secret innifrån funktionen.
 		console.log("Du gissade: " + number); // Detta nummer är det som användaren gissade på.
-		counter+=1;
+		
 
-		// Plats för förändring.
-		if (number > 100 || number < 0)
+		// Här kollar jag så att talet som matas in inte är mindre än 0 och större än 100. Samt att talet är i korrekt format, dvs inte i text utan siffror.
+		if (number > 100 || number < 0 || isNaN(number))
 		{
 		    return [false, "Gissa på ett tal mellan 0-100!"];
 		}
+		
 		else
 		{
+            // Lägger på +1 på antal gånger man gissat talet
+		    counter += 1;
 		    if (number < secret) {
 		        return [false, "Hemliga talet är högre än " + number + "!"];
 		    }
