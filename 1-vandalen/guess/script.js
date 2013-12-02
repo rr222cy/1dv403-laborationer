@@ -2,7 +2,7 @@
 
 window.onload = function(){
 	
-    var secret = Math.floor(Math.random() * (100 - 1) + 1) + 1;; // Detta tal behöver bytas ut mot ett slumpat tal.
+    var secret = Math.floor(Math.random() * (100 - 1) + 1) + 1; // Detta tal behöver bytas ut mot ett slumpat tal.
 	
 	// I denna funktion ska du skriva koden för att hantera "spelet"
 	var guess = function(number){
@@ -12,18 +12,18 @@ window.onload = function(){
 		// Plats för förändring.
 		if (number > 100 || number < 0)
 		{
-		    console.log("Gissa på ett tal mellan 0-100!");
+		    return [false, "Gissa på ett tal mellan 0-100!"];
 		}
 		else
 		{
 		    if (number < secret) {
-		        console.log("Talet är större än " + number);
+		        return [false, "Hemliga talet är högre än " + number + "!"];
 		    }
 		    else if (number > secret) {
-		        console.log("Talet är mindre än " + number);
+		        return [false, "Hemliga talet är mindre än " + number + "!"];
 		    }
 		    else if (number == secret) {
-		        console.log("Grattis! Du gissade rätt, talet är " + number);
+		        return [true, "Grattis du vann! Det hemliga talet var " + secret + " och du behövde y gissningar för att hitta det!"];
 		    }
 		}
 
