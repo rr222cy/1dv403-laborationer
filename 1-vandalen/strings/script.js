@@ -6,13 +6,19 @@ window.onload = function(){
 	var convertString = function(str){
 		// Plats för förändring.		
 		// Returnera den konverterade strängen.
-		// Vid fel, kasta ett undantag med ett meddelande till användaren. 
+	    // Vid fel, kasta ett undantag med ett meddelande till användaren.
+
+	    if (str === "")
+	    {
+	        return "Mata in en mening du vill omvandla!";
+	    }
+	    else
+	    {
+	        var strConverted = str.toLowerCase();
+
+	        return strConverted;
+	    }
 	
-
-
-
-
-
 
 	};
 	// ------------------------------------------------------------------------------
