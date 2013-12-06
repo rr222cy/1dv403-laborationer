@@ -4,14 +4,28 @@ window.onload = function(){
 
 	
 	var birthday = function(date){
-		
+    
+    // Börjar här med att splitta strängen vi får från formuläret, lägger in varje element i en varsin variabel, dag, månad år.
+    var splitDate = date.split('-');  
+    var day = splitDate[2];  
+    var month = splitDate[1];  
+    var year = splitDate[0];
+        
+        alert(day);
+        alert(month);
 
-
-			// Din kod här.
-
-
-
-
+        try
+        {
+            if(false)
+            {
+                throw "Ange ett korrekt datum, tack!";
+            }
+        }
+        catch(errorMsg)
+        {
+            return errorMsg;
+        }
+        
 	};
 	// ------------------------------------------------------------------------------
 
@@ -28,7 +42,7 @@ window.onload = function(){
 		p.classList.remove( "error");
 
 		try {
-			var answer = birthday(input.value) // Läser in texten från textrutan och skickar till funktionen "convertString"
+			var answer = birthday(input.value); // Läser in texten från textrutan och skickar till funktionen "convertString"
 			var message;
 			switch (answer){
 				case 0: message = "Grattis på födelsedagen!";
