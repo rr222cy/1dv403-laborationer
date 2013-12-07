@@ -5,20 +5,33 @@ window.onload = function(){
 	
 	var birthday = function(date){
     
-    // Börjar här med att splitta strängen vi får från formuläret, lägger in varje element i en varsin variabel, dag, månad år.
-    var splitDate = date.split('-');  
-    var day = splitDate[2];  
-    var month = splitDate[1];  
-    var year = splitDate[0];
+        // Börjar här med att splitta strängen vi får från formuläret, lägger in varje element i en varsin variabel, dag, månad år.
+        var splitDate = date.split('-');  
+        var day = splitDate[2];  
+        var month = splitDate[1]-1;  
+    
+        // Skapar sedan ett nytt Dateobjekt för vår födelsedag, samt för dagens datum.
+        var birthDate = new Date();
+        var dateToday = new Date();
         
-        alert(day);
-        alert(month);
-
+        // Här vill jag sätta in inputvärden, samt året+1 i mitt birthDayobjekt, så att jag sedan kan jämföra de båda tiderna och räkna dagarna till nästa födelsedag.
+        var year = birthDate.getFullYear();
+        birthDate.setFullYear(year +1);
+        birthDate.setMonth(month);
+        birthDate.setDate(day);
+               
         try
         {
-            if(false)
+            // Kollar så att våra värden är riktiga nummer, samt inte för stora utan följer formatet YYYY-MM-DDD.
+            if(isNaN(day) || day.length > 2 || isNaN(month) || month.length > 2 || isNaN(year) || year.length > 4)
             {
-                throw "Ange ett korrekt datum, tack!";
+                throw "Ange ett datum med formateringen YYYY-MM-DD, tack!";
+            }
+            else
+            {
+                // Beräknar differansen mellan födelsedatumet och dagens datum, delar på milli-,sekunder,minuter,timmar för korrekt värde.
+                var calculateBirthDate = Math.round((birthDate.getTime()/(1000*60*60*24)) - (dateToday.getTime()/(1000*60*60*24)));
+                return calculateBirthDate;
             }
         }
         catch(errorMsg)
