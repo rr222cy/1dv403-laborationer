@@ -31,6 +31,12 @@ window.onload = function(){
             {
                 // Beräknar differansen mellan födelsedatumet och dagens datum, delar på milli-,sekunder,minuter,timmar för korrekt värde.
                 var calculateBirthDate = Math.round((birthDate.getTime()/(1000*60*60*24)) - (dateToday.getTime()/(1000*60*60*24)));
+                // Kontrollerar här så att vi inte skriver ut att det är 365+ dagar kvar, när det de facto är födelsedagsdags.
+                if (calculateBirthDate >= 365) 
+                {
+                    return calculateBirthDate - 365;
+                }
+                    
                 return calculateBirthDate;
             }
         }
