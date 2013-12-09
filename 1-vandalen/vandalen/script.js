@@ -20,7 +20,12 @@ var makePerson = function(persArr) {
     maxAge = allAges[allAges.length-1];
     averageAge = Math.round(totalAge / allAges.length);
     // Sorterar här namnen i bokstavsordning, sedan så slår jag ihop alla namnen i min array till en ny string i variabeln names.
-    namesArray.sort();
+    // Jämför med lokala bokstäver mot icke-lokala för rätt sortering.
+    namesArray.sort(function sortLocaleLetters(a, b) 
+                    {
+                        return a.toString().localeCompare(b.toString());
+                    }
+                   );
     names = namesArray.join(", ");
     
     // Sätter samman objektet jag sedan returnerar.
