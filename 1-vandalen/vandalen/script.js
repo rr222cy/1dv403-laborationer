@@ -2,7 +2,7 @@
 
 var makePerson = function(persArr) {
    
-    var result = {}, maxAge, minAge, averageAge, names = [], allAges = [];
+    var result = {}, maxAge, minAge, averageAge, namesArray = [], allAges = [], names;
     var totalAge = 0;
         
     // Loopar ut alla åldrar och namn ur arrayen persArr, skickar sedan in resultaten i 2 nya arrayer så vi kan sortera dessa.
@@ -11,7 +11,7 @@ var makePerson = function(persArr) {
     {
         allAges.push(persArr[i].age);
         totalAge += persArr[i].age;
-        names.push(persArr[i].name);
+        namesArray.push(persArr[i].name);
     }
     
     // Sorterar här åldrarna så att vi får yngst först och äldst sist
@@ -19,18 +19,16 @@ var makePerson = function(persArr) {
     minAge = allAges[0];
     maxAge = allAges[allAges.length-1];
     averageAge = Math.round(totalAge / allAges.length);
-   
+    // Sorterar här namnen i bokstavsordning, sedan så slår jag ihop alla namnen i min array till en ny string i variabeln names.
+    namesArray.sort();
+    names = namesArray.join(", ");
     
-    names.sort();
-    var name;
-    
-    name = names.join(", ");
-    
+    // Sätter samman objektet jag sedan returnerar.
     result = {
         maxAge: maxAge,
         minAge: minAge,
         averageAge: averageAge,
-        names: name
+        names: names
     };
     
     return result;
