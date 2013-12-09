@@ -1,20 +1,27 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8">
-    <title>Labby Mezzage</title>
-    <link rel="stylesheet" href="style.css">
-  </head>
-  <body>
-      <div id="container">
-          <header>
-            <h1>Labby Mezzage</h1>
-          </header>
-          
-          <main>Hej</main>
-      </div>
-      
-    <script src="Message.js"></script>
-    <script src="MessageBoard.js"></script>
-  </body>
+    <head>
+        <meta charset="utf-8">
+        <title>Labby Mezzage</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <div id="container">
+            <header></header>
+            
+            <main>
+                <div class="messageBox">
+                    Content
+                </div>
+                
+                <div id="newMessageBox">
+                    <textarea class="newMessage"></textarea>
+                    <input type="button" value="Sänd">
+                </div>
+            </main>
+        </div>
+        
+        <script src="Message.js"></script>
+        <script src="MessageBoard.js"></script>
+    </body>
 </html>
