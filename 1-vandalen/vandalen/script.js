@@ -2,12 +2,7 @@
 
 var makePerson = function(persArr) {
    
-    var result = {};
-    var maxAge;
-    var minAge;
-    var averageAge;
-    var names = [];
-    var allAges = [];
+    var result = {}, maxAge, minAge, averageAge, names = [], allAges = [];
     var totalAge = 0;
         
     // Loopar ut alla åldrar och namn ur arrayen persArr, skickar sedan in resultaten i 2 nya arrayer så vi kan sortera dessa.
@@ -27,12 +22,15 @@ var makePerson = function(persArr) {
    
     
     names.sort();
+    var name;
+    
+    name = names.join(", ");
     
     result = {
         maxAge: maxAge,
         minAge: minAge,
         averageAge: averageAge,
-        names: names
+        names: name
     };
     
     return result;
