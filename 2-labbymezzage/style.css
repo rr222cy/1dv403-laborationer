@@ -18,7 +18,7 @@ body {
     margin: 0;
     background-color: #eeeeee;
     font-family: Georgia, Tahoma, Verdana, Arial;
-    font-size: 14pt;
+    font-size: 12pt;
     line-height: 140%;
     color: #353535;
 }
@@ -54,6 +54,7 @@ main {
     padding: 0.5%;
     color: #ffffff;
     background-color: #353535;
+    margin: 5px 0px 6px 0px;
 }
 
 #newMessageBox {
@@ -89,5 +90,17 @@ h1 {
 .newMessage {
     width: 99%;
     min-height: 100px;
+    max-width: 795px;
+    font-size: 14pt;
+}
+
+.newMessage:focus {
+    background-color: #e1e1e1;
+    font-size: 14pt;
+}
+        
+
+input {
+    padding: 1%;
 }
     
