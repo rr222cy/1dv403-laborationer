@@ -15,11 +15,10 @@ console.log("Tjolahopp, mess sänt!");
 };
 
 */
-window.onload = function () {
-    messageBoard.init();
-};
-
 var messageBoard = {
+    
+    messages: [],
+    
     init:function()
     {
         var mess = new Message("Tjolahopp!", new Date());
@@ -28,4 +27,8 @@ var messageBoard = {
         mess.setText("Tengil, vår befriare!");
         alert(mess);
     }
+};
+
+window.onload = function () {
+    messageBoard.init();
 };
