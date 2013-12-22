@@ -15,3 +15,17 @@ console.log("Tjolahopp, mess sänt!");
 };
 
 */
+window.onload = function () {
+    messageBoard.init();
+};
+
+var messageBoard = {
+    init:function()
+    {
+        var mess = new Message("Tjolahopp!", new Date());
+        alert(mess);
+        alert(mess.getText());
+        mess.setText("Tengil, vår befriare!");
+        alert(mess);
+    }
+};
