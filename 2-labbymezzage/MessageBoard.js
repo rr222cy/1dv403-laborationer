@@ -24,8 +24,21 @@ var messageBoard = {
         // Skapar en variabel här för att slippa upprepa en massa kod, kan slänga på .value där det behövs.
         // Kör en addEventListener som kollar om man klickar på min skickaknapp, om så, pushas meddelandet + datum till messages-arrayen.
         var messageText = document.getElementById("messageBox");
-        document.getElementById("messageSubmit").addEventListener("click", function(){ messageBoard.messages.push(new Message(messageText.value, new Date())); console.log(messageBoard.messages[0].getText()); }, false);
+        document.getElementById("messageSubmit").addEventListener("click", function(){ messageBoard.messages.push(new Message(messageText.value, new Date())); messageBoard.messagesCounter(); }, false);
         
+    },
+    
+    renderMessages: function()
+    {
+        // Raderar alla meddelanden
+        
+        // Renderar alla meddelanden
+    },
+    
+    messagesCounter: function()
+    {
+        // Räknar ut och presenterar antalet meddelanden.
+        document.getElementById("messageCounter").innerHTML = "Antal meddelanden: " + messageBoard.messages.length;
     }
 };
 
