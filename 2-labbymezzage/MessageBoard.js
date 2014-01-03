@@ -31,6 +31,7 @@ var messageBoard = {
                                     messageBoard.messagesCounter(); 
                                 }, false);
         
+        
     },
     
     renderMessages: function()
@@ -84,7 +85,7 @@ var messageBoard = {
         messTimestampLink.href = "#";
         messTimestampLink.className = "deleteMess";
         messTimestampLink.onclick = function () {
-            alert(messageBoard.messages[messageID].getDate());
+            alert(messageBoard.messages[messageID].getDateText());
         };
         
         // Skapar meddelandetexten i sig och innehållande DIV-element för allting.
@@ -93,6 +94,7 @@ var messageBoard = {
         messDiv.appendChild(messDeleteLink);
         messTimestampLink.appendChild(messTimePic);
         messDiv.appendChild(messTimestampLink);
+        
         messDiv.className = "messageBox";
         messageBox[0].appendChild(messDiv);
     },

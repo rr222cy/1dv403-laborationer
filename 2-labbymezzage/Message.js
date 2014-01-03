@@ -40,4 +40,5 @@ Message.prototype.getHTMLText = function () {
 };
 
 Message.prototype.getDateText = function () {
+    return "Inlägget skapades den " + this.getDate();
 };
