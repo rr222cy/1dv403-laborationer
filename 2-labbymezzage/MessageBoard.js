@@ -24,15 +24,39 @@ var messageBoard = {
         // Skapar en variabel här för att slippa upprepa en massa kod, kan slänga på .value där det behövs.
         // Kör en addEventListener som kollar om man klickar på min skickaknapp, om så, pushas meddelandet + datum till messages-arrayen.
         var messageText = document.getElementById("messageBox");
-        document.getElementById("messageSubmit").addEventListener("click", function(){ messageBoard.messages.push(new Message(messageText.value, new Date())); messageBoard.messagesCounter(); }, false);
+        document.getElementById("messageSubmit").addEventListener("click", function()
+                                { 
+                                    messageBoard.messages.push(new Message(messageText.value, new Date()));
+                                    messageBoard.renderMessages();
+                                    messageBoard.messagesCounter(); 
+                                }, false);
         
     },
     
     renderMessages: function()
     {
-        // Raderar alla meddelanden
+        // Raderar alla meddelanden från att presenteras.
+        var messageArea = document.querySelector("#messageArea");
+        messageArea.innerHTML = "";
         
-        // Renderar alla meddelanden
+        // Renderar alla meddelanden igen.
+        for(var i = 0; i < messageBoard.messages.length; ++i)
+        {
+            messageBoard.renderMessage(i);
+            messageBoard.messages[i].getText();
+            
+        }
+    },
+    
+    renderMessage: function(messageID)
+    {
+        // Formaterar meddelandet så det ser ut på önskat vis.
+        var messageBox = document.querySelectorAll("#messageArea");
+        var newMess = document.createElement("div");
+        var newMessText = document.createTextNode(messageBoard.messages[messageID].getText());
+        newMess.appendChild(newMessText);
+        newMess.className = "messageBox";
+        messageBox[0].appendChild(newMess);
     },
     
     messagesCounter: function()
