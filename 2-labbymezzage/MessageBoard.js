@@ -61,6 +61,9 @@ var messageBoard = {
         messLink.appendChild(messLinkText);
         messLink.href = "#";
         messLink.className = "deleteMess";
+        messLink.onclick = function () {
+        messageBoard.removeMessage(messageID);
+    }
         
         // Skapar meddelandetexten i sig och innehållande DIV-element för allting.
         messDiv.appendChild(newMessText);
@@ -72,13 +75,9 @@ var messageBoard = {
     removeMessage: function(messageID)
     {
         // Raderar valt meddelande från messages-arrayen.
-        document.getElementsByClassName("deleteMess").addEventListener("click", function()
-                                { 
-                                    messageBoard.messages.splice(1,1);
-                                    messageBoard.renderMessages();
-                                    messageBoard.messagesCounter(); 
-                                }, false);
-        
+        messageBoard.messages.splice(messageID,1);
+        messageBoard.renderMessages();
+        messageBoard.messagesCounter();         
     },
     
     messagesCounter: function()
