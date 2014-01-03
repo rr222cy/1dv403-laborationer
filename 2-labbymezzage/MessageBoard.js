@@ -53,31 +53,59 @@ var messageBoard = {
         // Formaterar meddelandet så det ser ut på önskat vis.
         var messageBox = document.querySelectorAll("#messageArea");
         var messDiv = document.createElement("div");
-        var messLink = document.createElement("a");
-        var messLinkText = document.createTextNode(" Radera mess");
-        var newMessText = document.createTextNode(messageBoard.messages[messageID].getText());
+        var messDeleteLink = document.createElement("a");
+        var messTimestampLink = document.createElement("a");
+        var messDeletePic = document.createElement("img");
+        var messTimePic = document.createElement("img");
+        
+        // Formaterar meddelandetexten korrekt.
+        var messLinkText = document.createTextNode("");
+        var newMessText = document.createTextNode(messageBoard.messages[messageID].getHTMLText());
+        
+        // Formaterar bilder korrekt.
+        messDeletePic.src = "pics/rubbish-bin.png";
+        messDeletePic.width = "16";
+        messDeletePic.height = "16";
+        
+        messTimePic.src = "pics/clock.png";
+        messTimePic.width = "16";
+        messTimePic.height = "16";
         
         // Skapar raderalänk för varje meddelande.
-        messLink.appendChild(messLinkText);
-        messLink.href = "#";
-        messLink.className = "deleteMess";
-        messLink.onclick = function () {
-        messageBoard.removeMessage(messageID);
-    }
+        messDeleteLink.appendChild(messLinkText);
+        messDeleteLink.href = "#";
+        messDeleteLink.className = "deleteMess";
+        messDeleteLink.onclick = function () {
+            messageBoard.removeMessage(messageID);
+        };
+        
+        // Skapar timestamplänk för varje meddelande.
+        messTimestampLink.appendChild(messLinkText);
+        messTimestampLink.href = "#";
+        messTimestampLink.className = "deleteMess";
+        messTimestampLink.onclick = function () {
+            alert(messageBoard.messages[messageID].getDate());
+        };
         
         // Skapar meddelandetexten i sig och innehållande DIV-element för allting.
         messDiv.appendChild(newMessText);
-        messDiv.appendChild(messLink);
+        messDeleteLink.appendChild(messDeletePic);
+        messDiv.appendChild(messDeleteLink);
+        messTimestampLink.appendChild(messTimePic);
+        messDiv.appendChild(messTimestampLink);
         messDiv.className = "messageBox";
         messageBox[0].appendChild(messDiv);
     },
     
     removeMessage: function(messageID)
     {
-        // Raderar valt meddelande från messages-arrayen.
-        messageBoard.messages.splice(messageID,1);
-        messageBoard.renderMessages();
-        messageBoard.messagesCounter();         
+        if(window.confirm("Vill du verkligen radera detta meddelande?"))
+        {
+            // Raderar valt meddelande från messages-arrayen.
+            messageBoard.messages.splice(messageID,1);
+            messageBoard.renderMessages();
+            messageBoard.messagesCounter();        
+        }
     },
     
     messagesCounter: function()
