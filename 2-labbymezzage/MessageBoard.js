@@ -52,11 +52,33 @@ var messageBoard = {
     {
         // Formaterar meddelandet så det ser ut på önskat vis.
         var messageBox = document.querySelectorAll("#messageArea");
-        var newMess = document.createElement("div");
+        var messDiv = document.createElement("div");
+        var messLink = document.createElement("a");
+        var messLinkText = document.createTextNode(" Radera mess");
         var newMessText = document.createTextNode(messageBoard.messages[messageID].getText());
-        newMess.appendChild(newMessText);
-        newMess.className = "messageBox";
-        messageBox[0].appendChild(newMess);
+        
+        // Skapar raderalänk för varje meddelande.
+        messLink.appendChild(messLinkText);
+        messLink.href = "#";
+        messLink.className = "deleteMess";
+        
+        // Skapar meddelandetexten i sig och innehållande DIV-element för allting.
+        messDiv.appendChild(newMessText);
+        messDiv.appendChild(messLink);
+        messDiv.className = "messageBox";
+        messageBox[0].appendChild(messDiv);
+    },
+    
+    removeMessage: function(messageID)
+    {
+        // Raderar valt meddelande från messages-arrayen.
+        document.getElementsByClassName("deleteMess").addEventListener("click", function()
+                                { 
+                                    messageBoard.messages.splice(1,1);
+                                    messageBoard.renderMessages();
+                                    messageBoard.messagesCounter(); 
+                                }, false);
+        
     },
     
     messagesCounter: function()
