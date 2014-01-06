@@ -40,5 +40,48 @@ Message.prototype.getHTMLText = function () {
 };
 
 Message.prototype.getDateText = function () {
-    return "Inlägget skapades den " + this.getDate();
+    var messageDate = this.getDate();
+    var messageDateMonth;
+    
+    switch(messageDate.getUTCMonth())
+    {
+    case 0:
+        messageDateMonth = "januari";
+        break;
+    case 1:
+        messageDateMonth = "februari";
+        break;
+    case 2:
+        messageDateMonth = "mars";
+        break;
+    case 3:
+        messageDateMonth = "april";
+        break;
+    case 4:
+        messageDateMonth = "maj";
+        break;
+    case 5:
+        messageDateMonth = "juni";
+        break;
+    case 6:
+        messageDateMonth = "juli";
+        break;
+    case 7:
+        messageDateMonth = "augusti";
+        break;
+    case 8:
+        messageDateMonth = "september";
+        break;
+    case 9:
+        messageDateMonth = "oktober";
+        break;
+    case 10:
+        messageDateMonth = "november";
+        break;
+    case 11:
+        messageDateMonth = "december";
+        break;
+    }
+    
+    return "Inlägget skapades den " + messageDate.getUTCDate() + " " + messageDateMonth + " " + messageDate.getUTCFullYear() + " klockan " + messageDate.toLocaleTimeString();    
 };

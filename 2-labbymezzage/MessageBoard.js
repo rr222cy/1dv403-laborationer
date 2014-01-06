@@ -56,8 +56,7 @@ var messageBoard = {
         for(var i = 0; i < messageBoard.messages.length; ++i)
         {
             messageBoard.renderMessage(i);
-            messageBoard.messages[i].getText();
-            
+            messageBoard.messages[i].getText();            
         }
     },
     
@@ -72,19 +71,19 @@ var messageBoard = {
         var messTimestampLink = document.createElement("a");
         var messDeletePic = document.createElement("img");
         var messTimePic = document.createElement("img");
-        var messLinkText = document.createTextNode("");
         
         // Formaterar bilder korrekt.
         messDeletePic.src = "pics/rubbish-bin.png";
         messDeletePic.width = "16";
         messDeletePic.height = "16";
+        messDeletePic.alt = "Ikon föreställande en soptunna";
         
         messTimePic.src = "pics/clock.png";
         messTimePic.width = "16";
         messTimePic.height = "16";
+        messTimePic.alt = "Ikon föreställande en klocka";
         
-        // Skapar raderalänk för varje meddelande.
-        messDeleteLink.appendChild(messLinkText);
+        // Skapar raderalänk för varje meddelande.        
         messDeleteLink.href = "#";
         messDeleteLink.className = "deleteMess";
         messDeleteLink.onclick = function () {
@@ -92,7 +91,6 @@ var messageBoard = {
         };
         
         // Skapar timestamplänk för varje meddelande.
-        messTimestampLink.appendChild(messLinkText);
         messTimestampLink.href = "#";
         messTimestampLink.className = "deleteMess";
         messTimestampLink.onclick = function () {
