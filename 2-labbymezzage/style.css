@@ -90,6 +90,9 @@ a {
     color: #cacaca;
 }
 
+.deleteMess {
+    float: right;
+}
 
 /* Form settings */
 
