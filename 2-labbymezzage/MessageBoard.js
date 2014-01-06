@@ -1,10 +1,11 @@
+/*jslint browser:true */
 "use strict";
 
 var messageBoard = {
     
     messages: [],
     
-    init:function(e)
+    init:function()
     {
         // Skapar en variabel här för att slippa upprepa en massa kod, kan slänga på .value där det behövs.
         // Kör en addEventListener som kollar om man klickar på min skickaknapp
