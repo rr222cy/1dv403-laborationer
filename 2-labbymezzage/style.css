@@ -83,6 +83,11 @@ h1 {
     padding-top: 2%;
 }
 
+#messageCounter {
+    font-size: 10pt;
+    float: right;
+}
+
 
 /* Link settings */
 

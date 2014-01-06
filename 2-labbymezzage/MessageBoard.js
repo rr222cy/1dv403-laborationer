@@ -11,10 +11,17 @@ var messageBoard = {
         // Om ja så pushas meddelandet + datum till messages-arrayen.
         var messageText = document.getElementById("messageBox");
         document.getElementById("messageSubmit").addEventListener("click", function()
-                                { 
-                                    messageBoard.messages.push(new Message(messageText.value, new Date()));
-                                    messageBoard.renderMessages();
-                                    messageBoard.messagesCounter();
+                                {
+                                    if(messageText.value === "")
+                                    {
+                                        alert("Skriv något innan du skickar!");
+                                    }
+                                    else
+                                    {
+                                        messageBoard.messages.push(new Message(messageText.value, new Date()));
+                                        messageBoard.renderMessages();
+                                        messageBoard.messagesCounter();
+                                    }
                                     // Rensar textboxen så användaren slipper göra det.
                                     messageText.value = "";
                                 }, false);
@@ -23,9 +30,16 @@ var messageBoard = {
             if ((e.keyCode === 13) && !e.shiftKey) {
                 // Förhindrar att enterslag gör ny rad, utan att shift hålls inne
                 e.preventDefault();
-                messageBoard.messages.push(new Message(messageText.value, new Date()));
-                messageBoard.renderMessages();
-                messageBoard.messagesCounter();
+                if(messageText.value === "")
+                {
+                    alert("Skriv något innan du skickar!");
+                }
+                else
+                {
+                    messageBoard.messages.push(new Message(messageText.value, new Date()));
+                    messageBoard.renderMessages();
+                    messageBoard.messagesCounter();
+                }
                 // Rensar textboxen så användaren slipper göra det.
                 messageText.value = "";
             }
@@ -56,10 +70,7 @@ var messageBoard = {
         var messTimestampLink = document.createElement("a");
         var messDeletePic = document.createElement("img");
         var messTimePic = document.createElement("img");
-        
-        // Formaterar meddelandetexten korrekt.
         var messLinkText = document.createTextNode("");
-        var newMessText = document.createTextNode(messageBoard.messages[messageID].getHTMLText());
         
         // Formaterar bilder korrekt.
         messDeletePic.src = "pics/rubbish-bin.png";
@@ -83,7 +94,7 @@ var messageBoard = {
         messTimestampLink.href = "#";
         messTimestampLink.className = "deleteMess";
         messTimestampLink.onclick = function () {
-            
+            alert(messageBoard.messages[messageID].getDateText());
         };
         
         // Skapar meddelandetexten i sig och innehållande DIV-element för allting.                
