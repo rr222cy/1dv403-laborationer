@@ -66,6 +66,8 @@ var messageBoard = {
         // Formaterar meddelandet så det ser ut på önskat vis.
         var messageBox = document.querySelector("#messageArea");
         var messDiv = document.createElement("div");
+        var messP = document.createElement("p");
+        var messPTime = document.createElement("p");
         var messDeleteLink = document.createElement("a");
         var messTimestampLink = document.createElement("a");
         var messDeletePic = document.createElement("img");
@@ -99,16 +101,19 @@ var messageBoard = {
         
         // Skapar meddelandetexten i sig och innehållande DIV-element för allting.                
         messDiv.className = "messageBox";        
-        messDiv.innerHTML = messageBoard.messages[messageID].getHTMLText();
+        messP.innerHTML = messageBoard.messages[messageID].getHTMLText();
+        messPTime.className = "messageTime";
+        messPTime.innerHTML = messageBoard.messages[messageID].getDate().toLocaleTimeString();
         
         messDeleteLink.appendChild(messDeletePic);
-        messDiv.appendChild(messDeleteLink);
+        messDiv.appendChild(messDeleteLink);       
         
         messTimestampLink.appendChild(messTimePic);
         messDiv.appendChild(messTimestampLink);
         
+        messDiv.appendChild(messP);
+        messDiv.appendChild(messPTime);
         messageBox.appendChild(messDiv);
-
     },
     
     removeMessage: function(messageID)

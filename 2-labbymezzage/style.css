@@ -17,7 +17,7 @@ body {
     width: 100%;
     margin: 0;
     background-color: #eeeeee;
-    font-family: Georgia, Tahoma, Verdana, Arial;
+    font-family: 'Quattrocento', Georgia, Tahoma, Verdana, Arial;
     font-size: 12pt;
     line-height: 140%;
     color: #353535;
@@ -86,6 +86,11 @@ h1 {
 #messageCounter {
     font-size: 10pt;
     float: right;
+}
+
+.messageTime {
+    font-size: 7pt;
+    text-align: right;
 }
 
 
