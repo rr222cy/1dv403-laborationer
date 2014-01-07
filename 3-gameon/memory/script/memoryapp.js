@@ -1,4 +1,4 @@
-/*jslint browser:true */
+/*jslint browser:true*/
 "use strict";
 
 var Memory = {
@@ -8,8 +8,8 @@ var Memory = {
     bricksGuesses: 0,
     
     // Här ställer vi in hur många kolumner och rader spelet skall ha, satt till 2x2 här.
-    cols: 2,
-    rows: 2,
+    cols: 4,
+    rows: 4,
     
     // Referens till tabellen vi vill lägga brickorna (rader/kolumner) i
     gameTable: document.getElementById("gameTable"),
@@ -22,12 +22,20 @@ var Memory = {
         
         for(var i = 0; i < Memory.rows; i++)
         {
-            console.log("rad");
+            // Det jag gör här är att skjuta in antalet rader i min tabell jag valt att spelet skall ha.
             var tableRow = gameTable.insertRow();
             for(var j = 0; j < Memory.cols; j++)
             {
-                tableRow.insertCell();
-                console.log("kolumn");
+                // Det jag gör här är att på varje rad skjuta in det antal kolumner jag valt att spelet skall ha per rad.
+                var tableCell = tableRow.insertCell();
+                
+                // Skapar brickorna och tilldelar dem värden.
+                var brickImage = document.createElement("img");
+                brickImage.src = "pics/0.png";
+                brickImage.width = "24";
+                brickImage.height = "24";
+                brickImage.alt = "Bilden föreställer en utav memoryts spelbrickor";
+                tableCell.appendChild(brickImage);
             }
         }
     }

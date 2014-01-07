@@ -84,5 +84,20 @@ input {
 
 /* Table settings */
 
+table, th, td
+{
+    border-collapse: collapse;
+    border-color: #353535;
+    padding: 20px;
+}
+
+th, thead, tfoot 
+{ 
+    background-color: #353535; 
+    color: #f4f4f4;
+    height: 30px;
+    padding: 2%;
+}
+
 #gameTable {
 }
