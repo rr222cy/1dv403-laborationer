@@ -100,4 +100,6 @@ th, thead, tfoot
 }
 
 #gameTable {
+    text-align: center;
+    margin: 0px auto;
 }

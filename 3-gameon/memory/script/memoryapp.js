@@ -35,13 +35,25 @@ var Memory = {
                 brickImage.width = "24";
                 brickImage.height = "24";
                 brickImage.alt = "Bilden föreställer en utav memoryts spelbrickor";
-                tableCell.appendChild(brickImage);
+                var brickLink = document.createElement("a");
+                brickLink.href = "#";
+                
+                // Lägger min länk kring bilden och skjuter in allt i en kolumn.
+                brickLink.appendChild(brickImage);               
+                tableCell.appendChild(brickLink);
             }
         }
+    },
+    
+    memoryMessage:function()
+    {
+        var memoryMessage = document.getElementById("memoryMessage");
+        memoryMessage.innerHTML = "Think I lost my memory.";
     }
     
 };
 
 window.onload = function () {
+    Memory.memoryMessage();
     Memory.init();
 };
