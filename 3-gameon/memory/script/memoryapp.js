@@ -16,6 +16,15 @@ var Memory = {
         // Slumpar fram brickor genom RandomGenerator och skickar sedan in detta i bricksArray[]
         Memory.bricksArray = RandomGenerator.getPictureArray(Memory.cols, Memory.rows);
         console.log(Memory.bricksArray);
+        
+        for(var i = 0; i < Memory.rows; i++)
+        {
+            console.log("rad");
+            for(var j = 0; j < Memory.cols; j++)
+            {
+                console.log("kolumn");
+            }
+        }
     }
     
 };

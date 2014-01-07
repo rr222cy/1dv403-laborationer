@@ -68,6 +68,7 @@ h1 {
 
 /* Link settings */
 
+
 a {
     color: #cacaca;
 }
@@ -79,4 +80,9 @@ a {
 input {
     padding: 1%;
 }
-    
+
+
+/* Table settings */
+
+#gameTable {
+}
