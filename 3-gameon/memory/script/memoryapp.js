@@ -11,6 +11,9 @@ var Memory = {
     cols: 2,
     rows: 2,
     
+    // Referens till tabellen vi vill lägga brickorna (rader/kolumner) i
+    gameTable: document.getElementById("gameTable"),
+    
     init:function()
     {
         // Slumpar fram brickor genom RandomGenerator och skickar sedan in detta i bricksArray[]
@@ -20,8 +23,10 @@ var Memory = {
         for(var i = 0; i < Memory.rows; i++)
         {
             console.log("rad");
+            var tableRow = gameTable.insertRow();
             for(var j = 0; j < Memory.cols; j++)
             {
+                tableRow.insertCell();
                 console.log("kolumn");
             }
         }
