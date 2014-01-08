@@ -10,48 +10,51 @@ var Validator = {
             var lastName = document.getElementById("lastName");
             var submitForm = document.getElementById("submitForm");
             var form = document.getElementById("buyForm");
-            var canSend = true;
+            var canSend = false;
             var error = "";
             var submitAction = function()
             {
                 // Validerar förnamn.
-                if(firstName.length === "")
+                if(firstName.value === "")
                 {
-                    error = Validator.errorMessage("Fältet får ej lämnas blankt!", "firstNameError");
+                    error = Validator.errorMessage("Fältet får ej lämnas blankt!", "firstName");
                     if(!document.getElementById("firstNameError"))
                     {
                         firstName.parentNode.insertBefore(error, firstName.nextSibling);
                     }
-                    canSend = false;
                 }
                 else
                 {
                     if(document.getElementById("firstNameError"))
                     {
-                        document.getElementById("firstNameError").innerHTML = "";
+                        firstNameError.parentNode.removeChild(firstNameError);
                     }
                 }
                 // Validerar efternamn.
                 if(lastName.value === "")
                 {
-                    error = Validator.errorMessage("Fältet får ej lämnas blankt!", "lastNameError");
+                    error = Validator.errorMessage("Fältet får ej lämnas blankt!", "lastName");
                     if(!document.getElementById("lastNameError"))
                     {
                         lastName.parentNode.insertBefore(error, lastName.nextSibling);
                     }
-                    canSend = false;
                 }
                 else
                 {
                     if(document.getElementById("lastNameError"))
                     {
-                        document.getElementById("lastNameError").innerHTML = "";
+                        lastNameError.parentNode.removeChild(lastNameError);
                     }
                 }
                 
                 // Validerar e-post.
                 
-                // Om allt är validerat ska canSend vara "true" och formuläret kan då sändas iväg.
+                // Om allt är validerat ska canSend vara "true" och formuläret kan då sändas iväg.                
+                if(!document.getElementById("firstNameError") && !document.getElementById("lastNameError"))
+                {
+                    canSend = true;
+                }
+                
                 if(canSend)
                 {
                     document.forms.buyForm.submit();
@@ -68,7 +71,7 @@ var Validator = {
         var messageSpan = document.createElement("span");
         var messageText = document.createTextNode(" " + message);
         messageSpan.className = "errorMessage";
-        messageSpan.id = inputID;
+        messageSpan.id = inputID + "Error";
         messageSpan.appendChild(messageText);
                
         return messageSpan;
