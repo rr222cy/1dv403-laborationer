@@ -12,16 +12,23 @@ var Validator = {
             var error = "";
             var submitAction = function()
             {
-                // Validerar förnamn
+                // Validerar förnamn.
                 if(firstName.value === "")
                 {
                     error = Validator.errorMessage("Fältet får ej lämnas blankt!", "firstNameError");
                     if(!document.getElementById("firstNameError"))
                     {
                         firstName.parentNode.insertBefore(error, firstName.nextSibling);
-                    }                    
+                    }
                 }
-                // Validerar efternamn
+                else
+                {
+                    if(document.getElementById("firstNameError"))
+                    {
+                        document.getElementById("firstNameError").innerHTML = "";
+                    }
+                }
+                // Validerar efternamn.
                 if(lastName.value === "")
                 {
                     error = Validator.errorMessage("Fältet får ej lämnas blankt!", "lastNameError");
@@ -30,6 +37,15 @@ var Validator = {
                         lastName.parentNode.insertBefore(error, lastName.nextSibling);
                     }
                 }
+                else
+                {
+                    if(document.getElementById("lastNameError"))
+                    {
+                        document.getElementById("lastNameError").innerHTML = "";
+                    }
+                }
+                
+                // Validerar e-post.
             };
             
             // Vid klick på skicka ska funktionen submitAction köras som validerar formuläret.
@@ -43,14 +59,13 @@ var Validator = {
         messageSpan.className = "errorMessage";
         messageSpan.id = inputID;
         messageSpan.appendChild(messageText);
-        
-        
-        
+               
         return messageSpan;
     }
     
 };
 
+// Kör igång min validator så snart windowobjektet är redo.
 window.onload = function () {
     Validator.init();
 };
