@@ -12,24 +12,24 @@
             </header>
             
             <main>
-                <form name="buyForm" action="#" method="post">
+                <form name="buyForm" id="buyForm" action="http://voyager.lnu.se/tekinet/kurser/dtt/wp_webbteknik/process_form.php" method="post">
                     <fieldset>
                         <legend>Fyll i din betalningsplan</legend>
                         <label class="leftalign" for="firstName">Förnamn:</label><br />
-                            <input type="text" name="firstName" id="firstName" required><br />
+                            <input type="text" name="firstName" id="firstName" ><br />
                         <label class="leftalign" for="lastName">Efternamn:</label><br />
-                            <input type="text" name="lastName" id="lastName" required><br />
+                            <input type="text" name="lastName" id="lastName" ><br />
                         <label class="leftalign" for="postalCode">Postnummer:</label><br />
-                            <input type="text" name="postalCode" id="postalCode" required><br />
+                            <input type="text" name="postalCode" id="postalCode" ><br />
                         <label class="leftalign" for="email">E-post:</label><br />
-                            <input type="email" name="email" id="email" required><br />
+                            <input type="email" name="email" id="email" ><br />
                         <label class="leftalign" for="Type">Prismodell:</label><br />
                             <select name="priceModel" id="priceModel">
                                 <option value="low" selected>Låg</option>
                                 <option value="high">Hög</option>
                             </select><br />
                     </fieldset>                                                    
-                <input type="submit" name="submitForm" id="submitForm" value="Genomför köp">
+                <input type="button" name="submitForm" id="submitForm" value="Genomför köp">
                 </form>
             </main>
         </div>      

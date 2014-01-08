@@ -9,17 +9,20 @@ var Validator = {
             var firstName = document.getElementById("firstName");
             var lastName = document.getElementById("lastName");
             var submitForm = document.getElementById("submitForm");
+            var form = document.getElementById("buyForm");
+            var canSend = true;
             var error = "";
             var submitAction = function()
             {
                 // Validerar förnamn.
-                if(firstName.value === "")
+                if(firstName.length === "")
                 {
                     error = Validator.errorMessage("Fältet får ej lämnas blankt!", "firstNameError");
                     if(!document.getElementById("firstNameError"))
                     {
                         firstName.parentNode.insertBefore(error, firstName.nextSibling);
                     }
+                    canSend = false;
                 }
                 else
                 {
@@ -36,6 +39,7 @@ var Validator = {
                     {
                         lastName.parentNode.insertBefore(error, lastName.nextSibling);
                     }
+                    canSend = false;
                 }
                 else
                 {
@@ -46,10 +50,17 @@ var Validator = {
                 }
                 
                 // Validerar e-post.
+                
+                // Om allt är validerat ska canSend vara "true" och formuläret kan då sändas iväg.
+                if(canSend)
+                {
+                    document.forms.buyForm.submit();
+                }
             };
             
             // Vid klick på skicka ska funktionen submitAction köras som validerar formuläret.
-            submitForm.addEventListener('click', submitAction, false);            
+            submitForm.addEventListener('click', submitAction, false);
+            
         },
     
     errorMessage:function(message, inputID)
