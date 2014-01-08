@@ -11,26 +11,28 @@
                 <h1>Validering</h1>
             </header>
             
-            <main>
-                <form name="buyForm" id="buyForm" action="http://voyager.lnu.se/tekinet/kurser/dtt/wp_webbteknik/process_form.php" method="post">
-                    <fieldset>
-                        <legend>Fyll i din betalningsplan</legend>
-                        <label class="leftalign" for="firstName">Förnamn:</label><br />
-                            <input type="text" name="firstName" id="firstName" ><br />
-                        <label class="leftalign" for="lastName">Efternamn:</label><br />
-                            <input type="text" name="lastName" id="lastName" ><br />
-                        <label class="leftalign" for="postalCode">Postnummer:</label><br />
-                            <input type="text" name="postalCode" id="postalCode" ><br />
-                        <label class="leftalign" for="email">E-post:</label><br />
-                            <input type="email" name="email" id="email" ><br />
-                        <label class="leftalign" for="Type">Prismodell:</label><br />
-                            <select name="priceModel" id="priceModel">
-                                <option value="low" selected>Låg</option>
-                                <option value="high">Hög</option>
-                            </select><br />
-                    </fieldset>                                                    
-                <input type="submit" name="submitForm" id="submitForm" value="Genomför köp">
-                </form>
+            <main>                
+                <div class="formField">
+                    <form name="buyForm" id="buyForm" action="http://voyager.lnu.se/tekinet/kurser/dtt/wp_webbteknik/process_form.php" method="post">
+                        <fieldset>
+                            <legend>Fyll i din betalningsplan</legend>                        
+                            <label class="leftalign" for="firstName">Förnamn:</label><br />
+                                <input type="text" name="firstName" id="firstName" ><br />
+                            <label class="leftalign" for="lastName">Efternamn:</label><br />
+                                <input type="text" name="lastName" id="lastName" ><br />
+                            <label class="leftalign" for="postalCode">Postnummer:</label><br />
+                                <input type="text" name="postalCode" id="postalCode" ><br />
+                            <label class="leftalign" for="email">E-post:</label><br />
+                                <input type="email" name="email" id="email" ><br />
+                            <label class="leftalign" for="Type">Prismodell:</label><br />
+                                <select name="priceModel" id="priceModel">
+                                    <option value="low" selected>Låg</option>
+                                    <option value="high">Hög</option>
+                                </select><br />
+                        </fieldset>                                                    
+                    <input type="submit" name="submitForm" id="submitForm" value="Genomför köp">
+                    </form>
+                </div>
             </main>
         </div>      
         <script src="validering.js"></script>

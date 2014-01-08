@@ -12,50 +12,40 @@ var Validator = {
             var email = document.getElementById("email");
             var submitForm = document.getElementById("submitForm");
             var canSend = false;
-            var error = "";
             
             // Denna funktion körs igång med sidan, validerar utefter att användaren fyller fälten med innehåll.
             var submitAction = function()
             {
                 // Validerar förnamn, efternamn, postkod samt e-post.
                 firstName.addEventListener('blur',function(e){
-                    validateEmptyFields(firstName, "firstName");
+                    validateEmptyFields(firstName);
                 }, true);
                 lastName.addEventListener('blur',function(e){
-                    validateEmptyFields(lastName, "lastName");
+                    validateEmptyFields(lastName);
                 }, true);
                 postalCode.addEventListener('blur',function(e){
-                    validateEmptyFields(postalCode, "postalCode");
+                    validatePostalCode(postalCode);
                 }, true);
                 email.addEventListener('blur',function(e){
-                    validateEmptyFields(email, "email");
+                    validateEmail(email);
                 }, true);                
             };
             
             // Funktion för att validera att inga inputs är tomma.
-            var validateEmptyFields = function(inputID, inputName)
+            var validateEmptyFields = function(inputID)
             {
-                var inputErrorMessageID = inputName + "Error";
                 if(inputID.value === "")
                 {
-                    error = Validator.errorMessage("Fältet får ej lämnas blankt!", inputName);
-                    if(!document.getElementById(inputErrorMessageID))
-                    {
-                        inputID.parentNode.insertBefore(error, inputID.nextSibling);
-                        inputID.className = "inputInvalid";
-                    }
+                    // Skriver ut ett tooltip vid formuläret
+                    Validator.errorMessage("Fältet är tomt!", inputID, false);                    
+                    // Gör inputfönstret rött
+                    inputID.className = "inputInvalid";
                 }
                 else
                 {
-                    if(document.getElementById(inputErrorMessageID))
-                    {
-                        if(inputErrorMessageID)
-                        {
-                            var inputErrorMessageElement = document.getElementById(inputErrorMessageID);
-                            inputErrorMessageElement.parentNode.removeChild(inputErrorMessageElement);
-                            inputID.className = "inputValid";
-                        }
-                    }
+                    // Raderar tooltipet.
+                    Validator.errorMessage("", inputID, true);                    
+                    // Gör inputfönstret grönt
                     inputID.className = "inputValid";
                 }
             };
@@ -70,12 +60,25 @@ var Validator = {
             var validateEmail = function(inputID, inputName)
             {
                 validateEmptyFields(inputID, inputName);
+                var epost = inputID.value;
+                
+                // TESTPATTERN - Hämtat från StackOverflow!
+                var pattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+                if(epost.match(pattern))
+                {                    
+                    inputID.className = "inputValid";
+                }
+                else
+                {   
+                    Validator.errorMessage("Eposten stämmer ej", inputID, false);
+                    inputID.className = "inputInvalid";
+                }
             };
             
             // Om allt är validerat ska canSend vara "true" och formuläret kan då sändas iväg. 
             var sendForm = function()
             {               
-                if(!document.getElementById("firstNameError") && !document.getElementById("lastNameError") && !document.getElementById("postalCodeError") && !document.getElementById("emailError"))
+                if(!document.getElementById("firstNameTip") && !document.getElementById("lastNameTip") && !document.getElementById("postalCodeTip") && !document.getElementById("emailTip"))
                 {
                     canSend = true;
                 }
@@ -91,8 +94,8 @@ var Validator = {
                 e.preventDefault();
                 validateEmptyFields(firstName, "firstName");
                 validateEmptyFields(lastName, "lastName");
-                validateEmptyFields(postalCode, "postalCode");
-                validateEmptyFields(email, "email");
+                validatePostalCode(postalCode, "postalCode");
+                validateEmail(email, "email");
                 sendForm();
             }, false);
                         
@@ -100,17 +103,27 @@ var Validator = {
         },
     
     // Funktion för att hantera felmeddelanden och skapa dessa.
-    errorMessage:function(message, inputID)
+    errorMessage:function(message, inputID, status)
     {
-        var messageSpan = document.createElement("span");
-        var messageText = document.createTextNode(" " + message);
-        messageSpan.className = "errorMessage";
-        messageSpan.id = inputID + "Error";
-        messageSpan.appendChild(messageText);
-               
-        return messageSpan;
-    }
-    
+        // Hämtar ut inputfältets ID-så jag senare kan skjuta in min span-tagg under den.
+        var input = document.getElementById(inputID.name);
+        var validateSpanCurrent = document.getElementById(inputID.name + "Tip");
+        
+        // Kollar om en spantagg redan finns som är kopplad till det inputID jag har, om ja så ska ingen ny skapas i onödan.
+        if(validateSpanCurrent !== null && status === true)
+        {
+            validateSpanCurrent.remove(validateSpanCurrent);
+        }
+        else if (validateSpanCurrent === null && status === false)
+        {
+            var validateSpan = document.createElement("span");
+            validateSpan.className = "errorMessage";
+            validateSpan.id = inputID.name + "Tip";
+            var messageText = document.createTextNode(" " + message);
+            validateSpan.appendChild(messageText);            
+            input.parentNode.insertBefore(validateSpan, input.nextSibling);
+        }
+    }    
 };
 
 // Kör igång min validator så snart windowobjektet är redo.

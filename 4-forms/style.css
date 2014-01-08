@@ -52,6 +52,15 @@ section {
     padding: 4% 2% 4% 3%;
 }
 
+.validationBox {
+    float: right;
+    width: 200px;
+}
+
+.formField {
+    width: 600px;
+}
+
 
 /* Text settings */
 
@@ -95,11 +104,13 @@ input
 .inputValid {
     border: 1px solid;
     border-color: green;
+    background-color: #f0fff3;
 }
 
 .inputInvalid {
     border: 1px solid;
     border-color: red;
+    background-color: #fff0f0;
 }
 
 select
