@@ -5,6 +5,9 @@ var Memory = {
     
     // Håller reda på brickorna och dess värde, samt antalet gissningar.
     bricksArray: [],
+    // Avser hålla reda på antalet brickor som vänts, fler än 2 samtidigt ska inte gå.
+    bricksFlipped: [],
+    // Håller reda på antalet gissningar.
     bricksGuesses: 0,
     
     // Här ställer vi in hur många kolumner och rader spelet skall ha, satt till 2x2 här.
