@@ -59,12 +59,13 @@ var Validator = {
                 var postalCode = inputID.value;
                 
                 // Pattern som kollar om vi har 3st siffor, mellanslag, 2st siffror,
-                var pattern = /([0-9]{3}) ([0-9]{2})/;
+                var pattern = /([0-9]{3})(|[-| ])([0-9]{2})/;
                 if(postalCode.match(pattern))
                 {                    
                     inputID.className = "inputValid";
                     // Om mellanrum finns, tas detta bort och nummret sätts samman till ett.
                     inputID.value = postalCode.split(" ").join("");
+                    inputID.value = postalCode.split("-").join("");
                     return true;
                 }
                 else
