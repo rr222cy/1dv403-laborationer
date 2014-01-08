@@ -92,6 +92,16 @@ input
     margin-bottom: 5px;
 }
 
+.inputValid {
+    border: 1px solid;
+    border-color: green;
+}
+
+.inputInvalid {
+    border: 1px solid;
+    border-color: red;
+}
+
 select
 {
     width: 53%;
