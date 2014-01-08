@@ -11,7 +11,6 @@ var Validator = {
             var postalCode = document.getElementById("postalCode");
             var email = document.getElementById("email");
             var submitForm = document.getElementById("submitForm");
-            var canSend = false;
             
             // Denna funktion körs igång med sidan, validerar utefter att användaren fyller fälten med innehåll.
             var submitAction = function()
@@ -37,16 +36,16 @@ var Validator = {
                 if(inputID.value === "")
                 {
                     // Skriver ut ett tooltip vid formuläret
-                    Validator.errorMessage("Fältet är tomt!", inputID, false);                    
-                    // Gör inputfönstret rött
+                    Validator.errorMessage("Fältet får ej vara tomt!", inputID, false);                    
                     inputID.className = "inputInvalid";
+                    return false;
                 }
                 else
                 {
                     // Raderar tooltipet.
                     Validator.errorMessage("", inputID, true);                    
-                    // Gör inputfönstret grönt
                     inputID.className = "inputValid";
+                    return true;
                 }
             };
             
@@ -54,6 +53,7 @@ var Validator = {
             var validatePostalCode = function(inputID, inputName)
             {
                 validateEmptyFields(inputID, inputName);
+                return true;
             };
             
             // Funktion för att validera e-postadresser
@@ -67,23 +67,20 @@ var Validator = {
                 if(epost.match(pattern))
                 {                    
                     inputID.className = "inputValid";
+                    return true;
                 }
                 else
                 {   
                     Validator.errorMessage("Eposten stämmer ej", inputID, false);
                     inputID.className = "inputInvalid";
+                    return false;
                 }
             };
             
-            // Om allt är validerat ska canSend vara "true" och formuläret kan då sändas iväg. 
+            // Om allt validerar sänds formuläret iväg.
             var sendForm = function()
-            {               
-                if(!document.getElementById("firstNameTip") && !document.getElementById("lastNameTip") && !document.getElementById("postalCodeTip") && !document.getElementById("emailTip"))
-                {
-                    canSend = true;
-                }
-                
-                if(canSend)
+            {         
+                if(validateEmptyFields(firstName, "firstName") && validateEmptyFields(lastName, "lastName") && validatePostalCode(postalCode, "postalCode") && validateEmail(email, "email"))
                 {
                     document.forms.buyForm.submit();
                 }
