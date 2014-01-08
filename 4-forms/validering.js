@@ -15,7 +15,10 @@ var Validator = {
             // Denna funktion körs igång med sidan, validerar utefter att användaren fyller fälten med innehåll.
             var submitAction = function()
             {
-                // Validerar förnamn, efternamn, postkod samt e-post.
+                // Sätter fokus på input för förnamn.
+                firstName.focus();
+                
+                // Validerar förnamn, efternamn, postkod samt e-post varje gång en användare lämnar ett inputfält.
                 firstName.addEventListener('blur',function(e){
                     validateEmptyFields(firstName);
                 }, true);
@@ -50,16 +53,34 @@ var Validator = {
             };
             
             // Funktion för att validera postkoder
-            var validatePostalCode = function(inputID, inputName)
+            var validatePostalCode = function(inputID)
             {
-                validateEmptyFields(inputID, inputName);
+                validateEmptyFields(inputID);
+                var postalCode = inputID.value;
+                
+                // Pattern som kollar om vi har 3st siffor, mellanslag, 2st siffror,
+                var pattern = /([0-9]{3}) ([0-9]{2})/;
+                if(postalCode.match(pattern))
+                {                    
+                    inputID.className = "inputValid";
+                    // Om mellanrum finns, tas detta bort och nummret sätts samman till ett.
+                    inputID.value = postalCode.split(" ").join("");
+                    return true;
+                }
+                else
+                {   
+                    Validator.errorMessage("Postnummret stämmer ej", inputID, false);
+                    inputID.className = "inputInvalid";
+                    return false;
+                }
+                
                 return true;
             };
             
             // Funktion för att validera e-postadresser
-            var validateEmail = function(inputID, inputName)
+            var validateEmail = function(inputID)
             {
-                validateEmptyFields(inputID, inputName);
+                validateEmptyFields(inputID);
                 var epost = inputID.value;
                 
                 // TESTPATTERN - Hämtat från StackOverflow!
