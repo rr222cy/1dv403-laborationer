@@ -41,6 +41,7 @@ body {
 /* DIV and block settings */
 
 
+/* Settings for whole desktop environment */
 #container {
     width: 100%;
     height: 100%;
@@ -71,13 +72,13 @@ main {
 }
 
 section {
-    max-width: 800px;
-    min-height: 100%;    
-    margin: 0px auto;
-    padding: 4% 2% 4% 3%;
 }
 
-.validationBox {
+footer {
+}
+
+/* Settings for windows in the desktop environment */
+.popupWindow {
     width: 35%;
     background-color: #ffffff;    
     -moz-box-shadow: 10px 10px 5px #888;
@@ -89,26 +90,22 @@ section {
     z-index: 9999;
 }
 
-.validationBoxContent {
+.popupWindowContent {
     padding: 1%;
     margin-bottom: 20px;
 }
 
-.validationBoxFooter {
+.popupWindowFooter {
     background-color: #282828;
     height: 50px;
     text-align: right;
     padding: 1%;
 }
 
-.validationButton {
+.popupWindowButton {
     width: inherit;
     margin-bottom: 0;
     padding: 2%;
-}
-
-.formField {
-    width: 100%;
 }
 
 
@@ -262,6 +259,19 @@ th, thead, tfoot
 
 /* Other settings */
 
+
 .grayOut {
     opacity:0.4;
+}
+
+/* Settings for the dock */
+.dockLink {
+    opacity: 0.5;
+    transition: opacity .20s ease-in-out;
+   -moz-transition: opacity .20s ease-in-out;
+   -webkit-transition: opacity .20s ease-in-out;
+}
+
+.dockLink:hover, .dockLink:focus {
+    opacity: 1;
 }
