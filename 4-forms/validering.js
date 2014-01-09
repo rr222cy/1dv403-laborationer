@@ -135,12 +135,6 @@ var Validator = {
             for(var j = 0; j < 2; j++)
             {
                 var tableCell = tableRow.insertCell();
-                //var cellP = document.createElement("p");
-                
-                //var cellText = document.createTextNode("Hej" + j);
-                //cellP.className = "bold";
-                //cellP.appendChild(cellText);
-                //tableCell.appendChild(cellP);
             }
         }  
         
