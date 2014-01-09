@@ -31,6 +31,7 @@ body {
     width: 100%;
     height: 100%;
     margin: 0px auto;
+    z-index:-1;
 }
 
 header {
@@ -53,12 +54,36 @@ section {
 }
 
 .validationBox {
-    float: right;
-    width: 200px;
+    width: 35%;
+    background-color: #ffffff;    
+    -moz-box-shadow: 10px 10px 5px #888;
+    -webkit-box-shadow: 10px 10px 5px #888;
+    box-shadow: 10px 10px 5px #888;
+    position: absolute;
+    top:10%;
+    right:32%;
+    z-index: 9999;
+}
+
+.validationBoxContent {
+    padding: 1%;
+    margin-bottom: 20px;
+}
+
+.validationBoxFooter {
+    background-color: #282828;
+    height: 50px;
+    text-align: right;
+    padding: 1%;
+}
+
+.validationButton {
+    width: 20%;
+    margin-bottom: 0;
 }
 
 .formField {
-    width: 600px;
+    width: 100%;
 }
 
 
@@ -74,12 +99,21 @@ h1 {
     padding-top: 2%;
 }
 
+h2 {
+    font-size: 20pt;
+    line-height: 150%;
+    font-weight: 700;
+    text-align: left;
+    margin-bottom: -2%;
+}
+
 .errorMessage {
     color: red;
 }
 
 
 /* Link settings */
+
 
 a {
     color: #cacaca;
@@ -153,4 +187,11 @@ label.leftalignshort
     float: left;
     width: 25%;
     margin-right: -22%;
+}
+
+
+/* Other settings */
+
+.grayOut {
+    opacity:0.4;
 }

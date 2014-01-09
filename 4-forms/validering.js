@@ -3,125 +3,48 @@
 
 var Validator = {
     
+    // Deklarerar och initierar variablerna/fälten jag kommer arbeta med.
+    firstName: document.getElementById("firstName"),
+    lastName:  document.getElementById("lastName"),
+    postalCode: document.getElementById("postalCode"),
+    email: document.getElementById("email"),
+    priceModel: document.getElementById("priceModel"),
+    submitForm: document.getElementById("submitForm"),
+    
     init:function()
         {
-            // Deklarerar och initierar variablerna/fälten jag kommer arbeta med.
-            var firstName = document.getElementById("firstName");
-            var lastName = document.getElementById("lastName");
-            var postalCode = document.getElementById("postalCode");
-            var email = document.getElementById("email");
-            var submitForm = document.getElementById("submitForm");
-            
             // Denna funktion körs igång med sidan, validerar utefter att användaren fyller fälten med innehåll.
             var submitAction = function()
             {
                 // Sätter fokus på input för förnamn.
-                firstName.focus();
-                
+                Validator.firstName.focus();                
                 // Validerar förnamn, efternamn, postkod samt e-post varje gång en användare lämnar ett inputfält.
-                firstName.addEventListener('blur',function(e){
-                    validateEmptyFields(firstName);
+                Validator.firstName.addEventListener('blur',function(e){
+                    Validator.validateEmptyFields(Validator.firstName);
                 }, true);
-                lastName.addEventListener('blur',function(e){
-                    validateEmptyFields(lastName);
+                Validator.lastName.addEventListener('blur',function(e){
+                    Validator.validateEmptyFields(Validator.lastName);
                 }, true);
-                postalCode.addEventListener('blur',function(e){
-                    validatePostalCode(postalCode);
+                Validator.postalCode.addEventListener('blur',function(e){
+                    Validator.validatePostalCode(Validator.postalCode);
                 }, true);
-                email.addEventListener('blur',function(e){
-                    validateEmail(email);
+                Validator.email.addEventListener('blur',function(e){
+                    Validator.validateEmail(Validator.email);
                 }, true);                
-            };
+            };                        
             
-            // Funktion för att validera att inga inputs är tomma.
-            var validateEmptyFields = function(inputID)
-            {
-                if(inputID.value === "")
-                {
-                    // Skriver ut ett tooltip vid formuläret
-                    Validator.errorMessage("Fältet får ej vara tomt!", inputID, false);                    
-                    inputID.className = "inputInvalid";
-                    return false;
-                }
-                else
-                {
-                    // Raderar tooltipet.
-                    Validator.errorMessage("", inputID, true);                    
-                    inputID.className = "inputValid";
-                    return true;
-                }
-            };
-            
-            // Funktion för att validera postkoder
-            var validatePostalCode = function(inputID)
-            {
-                validateEmptyFields(inputID);
-                var postalCode = inputID.value;
-                
-                // Pattern som kollar om vi har endera ett S eller ett E, sedan ett mellanslag eller ej, sedan 3 siffor mellan 0-9, sedan inget mellanslag
-                // bindestreck, eller mellanrum, sedan 2 siffror mellan 0-9.
-                var pattern = /([ES]|)( |)(\d{3})(|[-| ])(\d{2})/;
-                var matched = postalCode.match(pattern);
-                console.log(matched[0]);
-                if(matched && postalCode.length <= 9)
-                {                    
-                    inputID.className = "inputValid";
-                    // Kollar om E, S, - eller mellanrum finns, ersätter det med sammandrag isf.
-                    inputID.value = matched[0].replace(/([ES]|-| )/g, "");
-                    return true;
-                }
-                else
-                {   
-                    Validator.errorMessage("Postnummret stämmer ej - XXXXX", inputID, false);
-                    inputID.className = "inputInvalid";
-                    return false;
-                }
-                
-                return true;
-            };
-            
-            // Funktion för att validera e-postadresser
-            var validateEmail = function(inputID)
-            {
-                validateEmptyFields(inputID);
-                var epost = inputID.value;
-                
-                // OBS! Detta pattern är inlånat från följande källa: http://www.aspsnippets.com/Articles/Email-Address-Validation-in-JavaScript-using-Regular-Expressions.aspx
-                var pattern = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
-                if(epost.match(pattern))
-                {                    
-                    inputID.className = "inputValid";
-                    return true;
-                }
-                else
-                {   
-                    Validator.errorMessage("Eposten stämmer ej", inputID, false);
-                    inputID.className = "inputInvalid";
-                    return false;
-                }
-            };
-            
-            // Om allt validerar sänds formuläret iväg.
-            var sendForm = function()
-            {         
-                if(validateEmptyFields(firstName, "firstName") && validateEmptyFields(lastName, "lastName") && validatePostalCode(postalCode, "postalCode") && validateEmail(email, "email"))
-                {
-                    document.forms.buyForm.submit();
-                }
-            };
-            
-            // Kontrollerar om alla uppgifter stämmer, sänder isf iväg formuläret.
-            submitForm.addEventListener('click', function(e){
+            // Om användaren klickar på skicka, valideras alla fält igen och informationen får verifieras av användaren.
+            Validator.submitForm.addEventListener('click', function(e){
                 e.preventDefault();
-                validateEmptyFields(firstName, "firstName");
-                validateEmptyFields(lastName, "lastName");
-                validatePostalCode(postalCode, "postalCode");
-                validateEmail(email, "email");
-                sendForm();
+                Validator.validateEmptyFields(Validator.firstName, "firstName");
+                Validator.validateEmptyFields(Validator.lastName, "lastName");
+                Validator.validatePostalCode(Validator.postalCode, "postalCode");
+                Validator.validateEmail(Validator.email, "email");
+                Validator.sendForm();
             }, false);
                         
             submitAction();
-        },
+        },  
     
     // Funktion för att hantera felmeddelanden och skapa dessa.
     errorMessage:function(message, inputID, status)
@@ -144,7 +67,145 @@ var Validator = {
             validateSpan.appendChild(messageText);            
             input.parentNode.insertBefore(validateSpan, input.nextSibling);
         }
-    }    
+    },
+    
+    // Funktion för att sända iväg formulärdatan.
+    sendForm:function()
+    {
+        if(Validator.validateEmptyFields(Validator.firstName) && Validator.validateEmptyFields(Validator.lastName) && Validator.validatePostalCode(Validator.postalCode) && Validator.validateEmail(Validator.email))
+        {
+            Validator.submitForm.value = "Validerar formulär och skickar!";                    
+            Validator.showModal();                    
+            //document.forms.buyForm.submit();
+        }
+        else
+        {
+            Validator.submitForm.value = "Genomför köp!";
+        }
+    },
+    
+    // Funktion för att visa en modal popup.
+    showModal:function()
+    {
+        // Ser till att frysa formuläret för ändringar medan popupen visas
+        Validator.firstName.disabled = true;
+        Validator.lastName.disabled = true;
+        Validator.postalCode.disabled = true;
+        Validator.email.disabled = true;
+        Validator.priceModel.disabled = true;
+        Validator.submitForm.disabled = true;
+        
+        var containerDiv = document.getElementById("container");
+        containerDiv.className = "grayOut";
+        
+        var modalBox = document.createElement("div"),
+            modalBoxContent = document.createElement("div"),
+            modalH2 = document.createElement("h2"),
+            modalHeader = document.createTextNode("Vänligen bekräfta ditt köp"),
+            modalFooter = document.createElement("div"),
+            modalConfirmButton = document.createElement("input"),
+            modalCancelButton = document.createElement("input");
+        
+        modalBox.className = "validationBox";
+        modalBoxContent.className = "validationBoxContent";
+        modalFooter.className = "validationBoxFooter";
+        modalConfirmButton.type = "button";
+        modalCancelButton.type = "button";
+        modalConfirmButton.value = "Bekräfta ditt köp";
+        modalCancelButton.value = "Avbryt";
+        modalConfirmButton.className = "validationButton";
+        modalCancelButton.className = "validationButton";
+        
+        // Lägger till rubriken i H2
+        modalH2.appendChild(modalHeader);
+        // Lägger till H2 i content
+        modalBoxContent.appendChild(modalH2);
+        // Lägger till content i boxen
+        modalBox.appendChild(modalBoxContent);
+        modalFooter.appendChild(modalCancelButton);
+        modalFooter.appendChild(modalConfirmButton);
+        // Lägger till footer i boxen
+        modalBox.appendChild(modalFooter);
+        // Lägger till boxen under body
+        document.body.appendChild(modalBox);
+        
+        
+        modalCancelButton.addEventListener("click", function () {
+            document.body.removeChild(modalBox);
+            containerDiv.className = "";
+            Validator.firstName.disabled = false;
+            Validator.lastName.disabled = false;
+            Validator.postalCode.disabled = false;
+            Validator.email.disabled = false;
+            Validator.priceModel.disabled = false;
+            Validator.submitForm.disabled = false;
+        }, false);
+    },
+    
+    // Funktion för att validera e-postadresser
+    validateEmail:function(inputID)
+    {
+        Validator.validateEmptyFields(inputID);
+        var epost = inputID.value;
+        
+        // OBS! Detta pattern är inlånat från följande källa: http://www.aspsnippets.com/Articles/Email-Address-Validation-in-JavaScript-using-Regular-Expressions.aspx
+        var pattern = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
+        if(epost.match(pattern))
+        {                    
+            inputID.className = "inputValid";
+            return true;
+        }
+        else
+        {   
+            Validator.errorMessage("Eposten stämmer ej", inputID, false);
+            inputID.className = "inputInvalid";
+            return false;
+        }
+    },
+    
+    // Funktion för att se till att fältet som valideras inte är tomt.
+    validateEmptyFields:function(inputID)
+    {
+        if(inputID.value === "")
+        {
+                    // Skriver ut ett tooltip vid formuläret
+            Validator.errorMessage("Fältet får ej vara tomt!", inputID, false);                    
+            inputID.className = "inputInvalid";
+            return false;
+        }
+        else
+        {
+            // Raderar tooltipet.
+            Validator.errorMessage("", inputID, true);                    
+            inputID.className = "inputValid";
+            return true;
+        }
+    },
+    
+    // Funktion för att validera svenska postkoder
+    validatePostalCode:function(inputID) 
+    {
+        Validator.validateEmptyFields(inputID);
+        var postalCode = inputID.value;
+        
+        // Pattern som kollar om vi har endera ett S eller ett E, sedan ett mellanslag eller ej, sedan 3 siffor mellan 0-9, sedan inget mellanslag
+        // bindestreck, eller mellanrum, sedan 2 siffror mellan 0-9.
+        var pattern = /([ES]|)( |)(\d{3})(|[-| ])(\d{2})/;
+        var matched = postalCode.match(pattern);
+        if(matched && postalCode.length <= 9)
+        {                    
+            inputID.className = "inputValid";
+            // Kollar om E, S, - eller mellanrum finns, ersätter det med sammandrag isf.
+            inputID.value = matched[0].replace(/([ES]|-| )/g, "");
+            return true;
+        }
+        else
+        {   
+            Validator.errorMessage("Postnummret stämmer ej - XXXXX", inputID, false);
+            inputID.className = "inputInvalid";
+            return false;
+        }        
+    }
 };
 
 // Kör igång min validator så snart windowobjektet är redo.
