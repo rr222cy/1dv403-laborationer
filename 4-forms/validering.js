@@ -70,13 +70,19 @@ var Validator = {
     },
     
     // Funktion för att sända iväg formulärdatan.
-    sendForm:function()
+    sendForm:function(finalConfirm)
     {
         if(Validator.validateEmptyFields(Validator.firstName) && Validator.validateEmptyFields(Validator.lastName) && Validator.validatePostalCode(Validator.postalCode) && Validator.validateEmail(Validator.email))
         {
-            Validator.submitForm.value = "Validerar formulär och skickar!";                    
-            Validator.showModal();                    
-            //document.forms.buyForm.submit();
+            if(finalConfirm)
+            {
+                document.forms.buyForm.submit();
+            }
+            else
+            {
+                Validator.submitForm.value = "Validerar formulär och skickar!";                    
+                Validator.showModal();
+            }                    
         }
         else
         {
@@ -139,6 +145,16 @@ var Validator = {
             Validator.email.disabled = false;
             Validator.priceModel.disabled = false;
             Validator.submitForm.disabled = false;
+        }, false);
+        
+        modalConfirmButton.addEventListener("click", function () {
+            Validator.firstName.disabled = false;
+            Validator.lastName.disabled = false;
+            Validator.postalCode.disabled = false;
+            Validator.email.disabled = false;
+            Validator.priceModel.disabled = false;
+            Validator.submitForm.disabled = false;
+            Validator.sendForm(true);
         }, false);
     },
     
