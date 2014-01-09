@@ -86,8 +86,8 @@ var Validator = {
                 validateEmptyFields(inputID);
                 var epost = inputID.value;
                 
-                // TESTPATTERN - Hämtat från StackOverflow!
-                var pattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+                // OBS! Detta pattern är inlånat från följande källa: http://www.aspsnippets.com/Articles/Email-Address-Validation-in-JavaScript-using-Regular-Expressions.aspx
+                var pattern = /^([\w-\.]+)@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.)|(([\w-]+\.)+))([a-zA-Z]{2,4}|[0-9]{1,3})(\]?)$/;
                 if(epost.match(pattern))
                 {                    
                     inputID.className = "inputValid";
