@@ -111,6 +111,10 @@ h2 {
     color: red;
 }
 
+.bold {
+    font-weight: 700;
+}
+
 
 /* Link settings */
 
@@ -187,6 +191,30 @@ label.leftalignshort
     float: left;
     width: 25%;
     margin-right: -22%;
+}
+
+
+/* Tables settings */
+
+
+table, th, td
+{
+    border-collapse: collapse;
+    border: 0px solid;
+    border-color: #353535;
+    padding: 8px;
+}
+
+th, thead, tfoot 
+{ 
+    background-color: #353535; 
+    color: #f4f4f4;
+    height: 30px;
+    padding: 2%;
+}
+
+tr td:first-child {
+    font-weight: 700;
 }
 
 

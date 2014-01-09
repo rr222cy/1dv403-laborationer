@@ -102,11 +102,15 @@ var Validator = {
         Validator.submitForm.disabled = true;
         
         var containerDiv = document.getElementById("container");
+        var formName = document.getElementById("buyForm");
+        
         containerDiv.className = "grayOut";
         
         var modalBox = document.createElement("div"),
             modalBoxContent = document.createElement("div"),
             modalH2 = document.createElement("h2"),
+            modalTable = document.createElement("table"),
+            modalTr = document.createElement("tr"),
             modalHeader = document.createTextNode("Vänligen bekräfta ditt köp"),
             modalFooter = document.createElement("div"),
             modalConfirmButton = document.createElement("input"),
@@ -121,6 +125,23 @@ var Validator = {
         modalCancelButton.value = "Avbryt";
         modalConfirmButton.className = "validationButton";
         modalCancelButton.className = "validationButton";
+        modalTable.id = "validationTable";
+        
+        // Loopar här ut 5 rader med 2 kolumner vardera och skjuter in dessa i min tabell.
+        for(var i = 0; i < 5; i++)
+        {
+            var tableRow = modalTable.insertRow();
+            for(var j = 0; j < 2; j++)
+            {
+                var tableCell = tableRow.insertCell();
+                //var cellP = document.createElement("p");
+                
+                //var cellText = document.createTextNode("Hej" + j);
+                //cellP.className = "bold";
+                //cellP.appendChild(cellText);
+                //tableCell.appendChild(cellP);
+            }
+        }  
         
         // Lägger till rubriken i H2
         modalH2.appendChild(modalHeader);
@@ -128,6 +149,8 @@ var Validator = {
         modalBoxContent.appendChild(modalH2);
         // Lägger till content i boxen
         modalBox.appendChild(modalBoxContent);
+        modalBox.appendChild(modalTable);
+        // Lägger till knappar i footern
         modalFooter.appendChild(modalCancelButton);
         modalFooter.appendChild(modalConfirmButton);
         // Lägger till footer i boxen
@@ -135,6 +158,21 @@ var Validator = {
         // Lägger till boxen under body
         document.body.appendChild(modalBox);
         
+        var row1 = document.getElementById("validationTable").rows[0].cells;
+        row1[0].appendChild(document.createTextNode("Förnamn: "));
+        row1[1].appendChild(document.createTextNode(Validator.firstName.value));
+        var row2 = document.getElementById("validationTable").rows[1].cells;
+        row2[0].appendChild(document.createTextNode("Efternamn: "));
+        row2[1].appendChild(document.createTextNode(Validator.lastName.value));
+        var row3 = document.getElementById("validationTable").rows[2].cells;
+        row3[0].appendChild(document.createTextNode("Postnummer: "));
+        row3[1].appendChild(document.createTextNode(Validator.postalCode.value));
+        var row4 = document.getElementById("validationTable").rows[3].cells;
+        row4[0].appendChild(document.createTextNode("E-post: "));
+        row4[1].appendChild(document.createTextNode(Validator.email.value));
+        var row5 = document.getElementById("validationTable").rows[4].cells;
+        row5[0].appendChild(document.createTextNode("Prismodell: "));
+        row5[1].appendChild(document.createTextNode(Validator.priceModel.value));
         
         modalCancelButton.addEventListener("click", function () {
             document.body.removeChild(modalBox);
@@ -145,6 +183,7 @@ var Validator = {
             Validator.email.disabled = false;
             Validator.priceModel.disabled = false;
             Validator.submitForm.disabled = false;
+            Validator.submitForm.value = "Genomför köp!";
         }, false);
         
         modalConfirmButton.addEventListener("click", function () {
