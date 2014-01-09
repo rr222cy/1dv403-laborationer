@@ -58,14 +58,14 @@ var Validator = {
                 validateEmptyFields(inputID);
                 var postalCode = inputID.value;
                 
-                // Pattern som kollar om vi har 3st siffor, mellanslag, 2st siffror,
-                var pattern = /([0-9]{3})(|[-| ])([0-9]{2})/;
-                if(postalCode.match(pattern))
+                // Pattern som kollar om vi har endera ett S eller ett E, sedan ett mellanslag eller ej, sedan 3 siffor mellan 0-9, sedan inget mellanslag
+                // bindestreck, eller mellanrum, sedan 2 siffror mellan 0-9.
+                var pattern = /([ES]|)( |)([0-9]{3})(|[-| ])([0-9]{2})/;
+                if(postalCode.match(pattern) && postalCode.length <= 7)
                 {                    
                     inputID.className = "inputValid";
-                    // Om mellanrum finns, tas detta bort och nummret sätts samman till ett.
-                    inputID.value = postalCode.split(" ").join("");
-                    inputID.value = postalCode.split("-").join("");
+                    // Kollar om E, S, - eller mellanrum finns, ersätter det med sammandrag isf.
+                    inputID.value = postalCode.replace(/([ES]|-| )/g, "");
                     return true;
                 }
                 else
