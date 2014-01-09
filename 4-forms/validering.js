@@ -82,6 +82,7 @@ var Validator = {
             {
                 Validator.submitForm.value = "Validerar formulär och skickar!";                    
                 Validator.showModal();
+                location.href="#container";
             }                    
         }
         else

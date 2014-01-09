@@ -78,8 +78,9 @@ section {
 }
 
 .validationButton {
-    width: 20%;
+    width: inherit;
     margin-bottom: 0;
+    padding: 2%;
 }
 
 .formField {

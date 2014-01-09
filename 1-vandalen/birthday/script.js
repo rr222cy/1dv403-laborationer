@@ -14,7 +14,7 @@ window.onload = function(){
         var birthDate = new Date();
         var dateToday = new Date();
         
-        // Här vill jag sätta in inputvärden, samt året+1 i mitt birthDayobjekt, så att jag sedan kan jämföra de båda tiderna och räkna dagarna till nästa födelsedag.
+        // Här vill jag sätta in inputvärden, samt året+1 i mitt birthDayobjekt, så att jag sedan kan jämföra de båda tiderna och räkna                 dagarna till nästa födelsedag.
         var year = birthDate.getFullYear();
         birthDate.setFullYear(year +1);
         birthDate.setMonth(month);
