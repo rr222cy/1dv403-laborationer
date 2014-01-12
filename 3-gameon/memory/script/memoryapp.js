@@ -21,30 +21,46 @@ var Memory = {
     {
         // Slumpar fram brickor genom RandomGenerator och skickar sedan in detta i bricksArray[]
         Memory.bricksArray = RandomGenerator.getPictureArray(Memory.cols, Memory.rows);
-        console.log(Memory.bricksArray);
+        // k kommer i iterationen lyfta ut varje slumpat tal ur bricksArray[].
+        var k = 0;
         
         for(var i = 0; i < Memory.rows; i++)
         {
+            
             // Det jag gör här är att skjuta in antalet rader i min tabell jag valt att spelet skall ha.
-            var tableRow = gameTable.insertRow();
+            var tableRow = Memory.gameTable.insertRow();
             for(var j = 0; j < Memory.cols; j++)
-            {
+            {   
                 // Det jag gör här är att på varje rad skjuta in det antal kolumner jag valt att spelet skall ha per rad.
                 var tableCell = tableRow.insertCell();
                 
-                // Skapar brickorna och tilldelar dem värden.
-                var brickImage = document.createElement("img");
-                brickImage.src = "pics/0.png";
-                brickImage.width = "24";
-                brickImage.height = "24";
-                brickImage.alt = "Bilden föreställer en utav memoryts spelbrickor";
-                var brickLink = document.createElement("a");
-                brickLink.href = "#";
-                
-                // Lägger min länk kring bilden och skjuter in allt i en kolumn.
-                brickLink.appendChild(brickImage);               
-                tableCell.appendChild(brickLink);
+                // Här skapar jag en bricka som tilldelas ett sedan tidigare slumpat värde.                
+                createBrick(Memory.bricksArray[k]);
+                k++;
             }
+        }
+        
+        // Funktion för att tillämpa en closure och verkligen få ut önskat värde ur varje iteration ovan.
+        function createBrick(nr)
+        {
+            // Skapar brickorna och tilldelar dem värden.
+            var brickImage = document.createElement("img");
+            brickImage.src = "pics/0.png";
+            brickImage.width = "24";
+            brickImage.height = "24";
+            brickImage.alt = "Bilden föreställer en utav memoryts spelbrickor";
+            var brickLink = document.createElement("a");
+            brickLink.href = "#";
+            
+            brickLink.onclick = function() 
+            {
+                console.log(nr);
+                brickImage.src = "pics/"+nr+".png";
+            };
+            
+            // Lägger min länk kring bilden och skjuter in allt i en kolumn.
+            brickLink.appendChild(brickImage);               
+            tableCell.appendChild(brickLink);
         }
     },
     
