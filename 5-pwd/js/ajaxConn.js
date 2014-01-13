@@ -29,9 +29,6 @@ function AjaxConn(url, callback)
     };
     
     xhr.open("get", url, true);
-    
-    xhr.setRequestHeader("If-Modified-Since", "Mon, 03 Jan 2000 00:00:00 GMT");
-    
     xhr.send(null);
 }
 

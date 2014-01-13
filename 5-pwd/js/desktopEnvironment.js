@@ -6,7 +6,7 @@ var desktopEnvironment = {
     {
         
         document.getElementById("galleryLink").onclick = function()
-        {
+        {            
             desktopEnvironment.showWindow();            
             return false;
         };
@@ -36,6 +36,7 @@ var desktopEnvironment = {
             modalBox.className = "popupWindow";
             modalBox.id = "popupWindow";
             modalBoxContent.className = "popupWindowContent";
+            modalBoxContent.id = "popupWindowContent";
             modalFooter.className = "popupWindowFooter";
             modalHeader.className = "popupWindowHeader";
             modalHeaderIcon.src = "pics/gallery.png";
@@ -63,13 +64,21 @@ var desktopEnvironment = {
             // Lägger till boxen i container-diven
             containerDiv.appendChild(modalBox);            
             modalBoxContent.innerHTML = "Testar fönsterhanteraren.<p>Test</p><p>Test</p><p>Test</p><p>Test</p><p>Test</p><p>Test</p><p>Test</p><p>Test</p><p>Test</p><p>Test</p><p>Test</p>";
-            
             // Vid klick på kryss stängs aktivt fönster.
             document.getElementById("closeGallery").onclick = function()
             {
                 containerDiv.removeChild(document.getElementById("popupWindow"));            
                 return false;
             };
+            
+            
+            document.getElementById("popupWindowContent").innerHTML = '<img src="pics/ajax-loader.gif" />';
+            
+            // Efter att fönstret renderats fram sker ett AJAX-anrop mot angiven URL.
+            new AjaxConn("http://homepage.lnu.se/staff/tstjo/labbyServer/imgviewer/", function(data) {
+                console.log(JSON.parse(data)[0].URL);
+                document.getElementById("popupWindowContent").innerHTML = JSON.parse(data)[0].URL;
+            });
         }
     },
     
