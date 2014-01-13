@@ -27,30 +27,55 @@ var desktopEnvironment = {
                 modalBoxContent = document.createElement("div"),
                 modalH2 = document.createElement("h2"),
                 modalFooter = document.createElement("div"),
-                modalHeader = document.createElement("div");
+                modalHeader = document.createElement("div"),
+                modalHeaderIcon = document.createElement("img"),
+                modalHeaderSpan = document.createElement("span"),
+                modalHeaderCloseIcon = document.createElement("img"),
+                modalHeaderCloseIconLink = document.createElement("a");
             
             modalBox.className = "popupWindow";
             modalBox.id = "popupWindow";
             modalBoxContent.className = "popupWindowContent";
             modalFooter.className = "popupWindowFooter";
             modalHeader.className = "popupWindowHeader";
-                    
+            modalHeaderIcon.src = "pics/gallery.png";
+            modalHeaderIcon.className = "popupWindowIcon";
+            modalHeaderSpan.className = "popupWindowText";
+            modalHeaderCloseIcon.src = "pics/close.png";
+            modalHeaderCloseIcon.className = "popupWindowClose";
+            
+            modalHeaderCloseIconLink.href = "#";
+            modalHeaderCloseIconLink.id = "closeGallery";
+            
+            modalHeader.appendChild(modalHeaderIcon);
+            modalHeaderSpan.appendChild(document.createTextNode("Image Viewer"));
+            modalHeader.appendChild(modalHeaderSpan);
+            modalHeaderCloseIconLink.appendChild(modalHeaderCloseIcon);
+            modalHeader.appendChild(modalHeaderCloseIconLink);
             // Lägger till headern i fönstret
             modalBox.appendChild(modalHeader);
             // Lägger till content i boxen
             modalBox.appendChild(modalBoxContent);
             // Lägger till footer i boxen
+            modalFooter.appendChild(document.createTextNode("Laddar..."));
             modalBox.appendChild(modalFooter);
             // Lägger till boxen i container-diven
             containerDiv.appendChild(modalBox);            
             modalBoxContent.innerHTML = "Testar fönsterhanteraren.";
+            
+            // Vid klick på kryss stängs aktivt fönster.
+            document.getElementById("closeGallery").onclick = function()
+            {
+                containerDiv.removeChild(document.getElementById("popupWindow"));            
+                return false;
+            };
         }
     },
     
     changeBackground:function(backgroundImage)
     {
         document.body.style.background = "url(" + backgroundImage + ")";
-    }
+    },
 };
 
 // Kör igång PWD:n direkt windowobjektet laddats in.
