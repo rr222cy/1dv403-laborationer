@@ -45,6 +45,7 @@ var desktopEnvironment = {
             modalHeaderCloseIcon.className = "popupWindowClose";
             
             modalHeaderCloseIconLink.href = "#";
+            modalHeaderCloseIconLink.title = "Stäng fönster";
             modalHeaderCloseIconLink.id = "closeGallery";
             
             modalHeader.appendChild(modalHeaderIcon);
