@@ -21,6 +21,11 @@ var Memory = {
     {
         // Slumpar fram brickor genom RandomGenerator och skickar sedan in detta i bricksArray[]
         Memory.bricksArray = RandomGenerator.getPictureArray(Memory.cols, Memory.rows);
+        Memory.renderBoard();
+    },
+    
+    renderBoard:function()
+    {
         // k kommer i iterationen lyfta ut varje slumpat tal ur bricksArray[].
         var k = 0;
         
@@ -49,18 +54,46 @@ var Memory = {
             brickImage.width = "24";
             brickImage.height = "24";
             brickImage.alt = "Bilden föreställer en utav memoryts spelbrickor";
+            brickImage.id = nr;
             var brickLink = document.createElement("a");
             brickLink.href = "#";
             
             brickLink.onclick = function() 
             {
                 console.log(nr);
+                brickLink.onclick = null;
+                // Vid klick byter jag ut "frågetecknet" mot rätt bild.
                 brickImage.src = "pics/"+nr+".png";
+                // Lägger till flippade brickan till arrayen som håller koll på matchningar och antalet flippade brickor.
+                checkBrick(nr);
             };
             
             // Lägger min länk kring bilden och skjuter in allt i en kolumn.
             brickLink.appendChild(brickImage);               
             tableCell.appendChild(brickLink);
+        }
+        
+        function checkBrick(nr)
+        {
+            // Skickar här in den klickade brickans värde i bricksFlipped-arrayen.
+            Memory.bricksFlipped.push(nr);
+            
+            
+            // Kollar här om vi fått 2 brickor klickade på, om ja så matchas de mot varandra.
+            if(Memory.bricksFlipped.length >= 2)
+            {
+                // Kontrollerar om bricka 1 matchar bricka 2.
+                if(Memory.bricksFlipped[0] === Memory.bricksFlipped[1])
+                {
+                    console.log("Brickorna matchar");
+                    Memory.bricksFlipped.length = 0;
+                }
+                else
+                {
+                    console.log("Brickorna matchar ej");
+                    Memory.bricksFlipped.length = 0;
+                }
+            }
         }
     },
     
