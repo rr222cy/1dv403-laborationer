@@ -107,12 +107,12 @@ th, thead, tfoot
     padding: 2%;
 }
 
-#gameTable {
+.gameTableStyle {
     text-align: center;
     margin: 0px auto;
 }
 
-#memoryMessage {
+.memoryMessageStyle {
     font-size: 14pt;
     text-align: center;
     margin-top: 20px;
