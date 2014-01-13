@@ -13,8 +13,8 @@ var Memory = {
     bricksPair: 0,
     
     // Här ställer vi in hur många kolumner och rader spelet skall ha, satt till 2x2 här.
-    cols: 2,
-    rows: 2,
+    cols: 4,
+    rows: 4,
     
     // Referens till tabellen vi vill lägga brickorna (rader/kolumner) i
     gameTable: document.getElementById("gameTable"),
@@ -25,7 +25,7 @@ var Memory = {
         Memory.bricksArray = RandomGenerator.getPictureArray(Memory.cols, Memory.rows);
         // k kommer i iterationen lyfta ut varje slumpat tal ur bricksArray[].
         var k = 0;
-        
+        restartGame();
         for(var i = 0; i < Memory.rows; i++)
         {            
             // Det jag gör här är att skjuta in antalet rader i min tabell jag valt att spelet skall ha.
@@ -60,24 +60,6 @@ var Memory = {
             flipBrick(brickLink, brickImage, nr);            
         }
         
-        function flipBrick(brickLink, brickImage, nr)
-        {
-            brickLink.onclick = function() 
-            {   
-                // Kollar här om min bild är frågetecknet "pics/0.png" om TRUE så ska brickan kunna vändas, annars inte.
-                if(brickImage.getAttribute("src") === "pics/0.png")
-                {
-                    // Vid klick byter jag ut "frågetecknet" mot rätt bild.
-                    brickImage.src = "pics/"+nr+".png";
-                    brickImage.className = "justFlipped";
-                    
-                    // Anropar funktionen för att kolla om vi får ett par eller inte.
-                    checkBrick(nr);
-                }
-                return false;
-            };
-        }
-        
         function checkBrick(nr)
         {   
             // Skickar här in den klickade brickans värde i bricksFlipped-arrayen.
@@ -99,9 +81,10 @@ var Memory = {
                     // Plussar på med 1 på antal gissningar.
                     Memory.bricksGuesses += 1;
                     
+                    // Kollar om spelet är slut, antal par blir alltid hälften av rader * kolumner.
                     if(Memory.bricksPair === (Memory.cols * Memory.rows / 2))
                     {
-                        Memory.memoryMessage("Grattis, du vann! Det tog bara: " + Memory.bricksGuesses + " försök");
+                        Memory.memoryMessage("Grattis, du klarade memoryt på " + Memory.bricksGuesses + " försök!");
                     }
                 }
                 else
@@ -110,9 +93,27 @@ var Memory = {
                     // Här sker en timeout på ca ½ sekund innan funktionen för att vända tillbaka brickorna anropas.
                     setTimeout(function() {
                         flipBack();
-                    }, 600);                    
+                    }, 700);                    
                 }
             }
+        }
+        
+        function flipBrick(brickLink, brickImage, nr)
+        {
+            brickLink.onclick = function() 
+            {   
+                // Kollar här om min bild är frågetecknet "pics/0.png" om TRUE så ska brickan kunna vändas, annars inte.
+                if(brickImage.getAttribute("src") === "pics/0.png")
+                {
+                    // Vid klick byter jag ut "frågetecknet" mot rätt bild.
+                    brickImage.src = "pics/"+nr+".png";
+                    brickImage.className = "justFlipped";
+                    
+                    // Anropar funktionen för att kolla om vi får ett par eller inte.
+                    checkBrick(nr);
+                }
+                return false;
+            };
         }
         
         function flipBack()
@@ -128,17 +129,30 @@ var Memory = {
             Memory.bricksGuesses += 1;
             console.log(Memory.bricksGuesses);
         }
+        
+        // Funktion för att börja om, nollställer allt utan att ladda om fönstret.
+        function restartGame()
+        {
+            console.log(document.getElementById("restartGame"));
+            document.getElementById("restartGame").addEventListener('click',function(){
+                    Memory.bricksArray.length = 0;
+                    Memory.bricksFlipped.length = 0;
+                    Memory.bricksGuesses = 0;
+                    Memory.bricksPair = 0;
+                    Memory.gameTable.innerHTML = "";
+                    Memory.memoryMessage("");
+                    Memory.init();
+                }, true);
+        }
     },
     
     memoryMessage:function(message)
     {
         var memoryMessage = document.getElementById("memoryMessage");
         memoryMessage.innerHTML = message;
-    }
-    
+    }    
 };
 
 window.onload = function () {
-    Memory.memoryMessage("Think I lost my memory");
     Memory.init();
 };

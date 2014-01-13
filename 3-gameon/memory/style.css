@@ -65,6 +65,14 @@ h1 {
     padding-top: 2%;
 }
 
+h2 {
+    font-size: 22pt;
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 2%;
+    padding-top: 2%;
+}
+
 
 /* Link settings */
 
@@ -102,4 +110,10 @@ th, thead, tfoot
 #gameTable {
     text-align: center;
     margin: 0px auto;
+}
+
+#memoryMessage {
+    font-size: 14pt;
+    text-align: center;
+    margin-top: 20px;
 }
