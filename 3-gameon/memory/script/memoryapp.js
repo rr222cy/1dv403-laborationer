@@ -13,8 +13,8 @@ var Memory = {
     bricksPair: 0,
     
     // Här ställer vi in hur många kolumner och rader spelet skall ha, satt till 2x2 här.
-    cols: 4,
-    rows: 4,
+    cols: 2,
+    rows: 2,
     
     // Referens till tabellen vi vill lägga brickorna (rader/kolumner) i
     gameTable: document.getElementById("gameTable"),
@@ -94,6 +94,15 @@ var Memory = {
                     justFlipped[0].className = "justFlippedRight";
                     justFlipped[1].className = "justFlippedRight";
                     Memory.bricksFlipped.length = 0;
+                    // Plussar på med 1 på antal par.
+                    Memory.bricksPair += 1;
+                    // Plussar på med 1 på antal gissningar.
+                    Memory.bricksGuesses += 1;
+                    
+                    if(Memory.bricksPair === (Memory.cols * Memory.rows / 2))
+                    {
+                        Memory.memoryMessage("Grattis, du vann! Det tog bara: " + Memory.bricksGuesses + " försök");
+                    }
                 }
                 else
                 {
@@ -113,9 +122,11 @@ var Memory = {
             justFlipped[1].src = "pics/0.png";
             justFlipped[0].className = "";
             justFlipped[1].className = "";
-            console.log(justFlipped);
+
             Memory.bricksFlipped.length = 0;
-            console.log("Flippar tillbaka");
+            // Plussar på med 1 på antal gissningar.
+            Memory.bricksGuesses += 1;
+            console.log(Memory.bricksGuesses);
         }
     },
     
