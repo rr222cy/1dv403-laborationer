@@ -4,6 +4,7 @@
 var desktopEnvironment = {
     init:function()
     {
+        
         document.getElementById("galleryLink").onclick = function()
         {
             desktopEnvironment.showWindow();            
@@ -45,6 +46,11 @@ var desktopEnvironment = {
             modalBoxContent.innerHTML = "Testar fönsterhanteraren.";
         }
     },
+    
+    changeBackground:function(backgroundImage)
+    {
+        document.body.style.background = "url(" + backgroundImage + ")";
+    }
 };
 
 // Kör igång PWD:n direkt windowobjektet laddats in.

@@ -10,9 +10,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 html {
     position: relative;
     min-height: 100%;
-    min-width: 100%;
-    background-color: #262626;
-    background-image: url(../pics/standardBackground.jpg);
+    min-width: 100%;    
     -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
@@ -79,27 +77,58 @@ footer {
 }
 
 /* Settings for windows in the desktop environment */
-.popupWindow {
-    width: 35%;
-    background-color: #ffffff;    
-    -moz-box-shadow: 10px 10px 5px #888;
-    -webkit-box-shadow: 10px 10px 5px #888;
-    box-shadow: 10px 10px 5px #888;
-    position: absolute;
-    top:10%;
-    right:32%;
-    z-index: 9999;
+
+@-webkit-keyframes FadeIn {
+    0% {
+        opacity:0;
+    }
+    100% {
+        opacity:1;
+    }
 }
+
+@-webkit-keyframes FadeOut {
+    0% {
+        opacity:1;
+    }
+    100% {
+        opacity:0;
+    }
+}
+
+.popupWindow {
+    min-width: 450px;
+    max-height: 450px;
+    overflow: auto;
+    background-color: #ffffff;    
+    -webkit-box-shadow: 5px 5px 5px 2px #141414;
+    box-shadow: 5px 5px 5px 2px #141414;
+    position: absolute;
+    top:16%;
+    left:10%;
+    -webkit-animation-name: FadeIn;
+    -webkit-animation-timing-function: ease-in;
+    -webkit-animation-duration: 0.6s;
+}
+
 
 .popupWindowContent {
     padding: 1%;
     margin-bottom: 20px;
+    color: #000000;
+}
+
+.popupWindowHeader {
+    background-color: #282828;
+    height: 45px;
+    text-align: left;
+    padding: 1%;
 }
 
 .popupWindowFooter {
     background-color: #282828;
-    height: 50px;
-    text-align: right;
+    height: 15px;
+    text-align: left;
     padding: 1%;
 }
 
