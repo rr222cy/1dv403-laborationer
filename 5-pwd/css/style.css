@@ -97,7 +97,12 @@ footer {
 }
 
 .popupWindow {
+    /*
     min-width: 450px;
+    max-width: 450px;
+    */
+    width: 400px;
+    height: 350px;
     background-color: #282828;    
     -webkit-box-shadow: 5px 5px 5px 2px #141414;
     box-shadow: 5px 5px 5px 2px #141414;
@@ -113,8 +118,9 @@ footer {
 }
 
 .popupWindowContent {
-    max-height: 350px;
+    height: 278px;
     overflow: auto;
+    overflow-x: hidden;
     padding: 1%;
     margin-bottom: 0px;
     color: #000000;

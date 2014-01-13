@@ -38,6 +38,7 @@ var desktopEnvironment = {
             modalBoxContent.className = "popupWindowContent";
             modalBoxContent.id = "popupWindowContent";
             modalFooter.className = "popupWindowFooter";
+            modalFooter.id = "popupWindowFooter";
             modalHeader.className = "popupWindowHeader";
             modalHeaderIcon.src = "pics/gallery.png";
             modalHeaderIcon.className = "popupWindowIcon";
@@ -63,7 +64,6 @@ var desktopEnvironment = {
             modalBox.appendChild(modalFooter);
             // Lägger till boxen i container-diven
             containerDiv.appendChild(modalBox);            
-            modalBoxContent.innerHTML = "Testar fönsterhanteraren.<p>Test</p><p>Test</p><p>Test</p><p>Test</p><p>Test</p><p>Test</p><p>Test</p><p>Test</p><p>Test</p><p>Test</p><p>Test</p>";
             // Vid klick på kryss stängs aktivt fönster.
             document.getElementById("closeGallery").onclick = function()
             {
@@ -71,14 +71,29 @@ var desktopEnvironment = {
                 return false;
             };
             
-            
-            document.getElementById("popupWindowContent").innerHTML = '<img src="pics/ajax-loader.gif" />';
+            // Visar en laddningsgif fram till att AJAX-anropet ersätter den.
+            document.getElementById("popupWindowFooter").innerHTML = '<img src="pics/ajax-loader-white.gif" width="12" height="12"/>&nbsp;&nbsp;Laddar...';
             
             // Efter att fönstret renderats fram sker ett AJAX-anrop mot angiven URL.
             new AjaxConn("http://homepage.lnu.se/staff/tstjo/labbyServer/imgviewer/", function(data) {
-                console.log(JSON.parse(data)[0].URL);
-                document.getElementById("popupWindowContent").innerHTML = JSON.parse(data)[0].URL;
-            });
+                var responseData = JSON.parse(data);
+                var picThumbWidth = [],
+                    picThumbHeight = [],
+                    picThumbURL = [];
+                
+                for(var i = 0; i < responseData.length; i++)
+                {
+                    picThumbHeight[i] = responseData[i].thumbHeight;
+                    picThumbWidth[i] = responseData[i].thumbWidth;
+                }
+                                
+                document.getElementById("popupWindowFooter").innerHTML = "";
+                
+                for(var i = 0; i < responseData.length; i++)
+                {
+                    document.getElementById("popupWindowContent").innerHTML += '<a href="#"><img src="'+responseData[i].thumbURL+'" class="galleryPic" /></a>';
+                }
+            });            
         }
     },
     
@@ -89,6 +104,4 @@ var desktopEnvironment = {
 };
 
 // Kör igång PWD:n direkt windowobjektet laddats in.
-window.onload = function () {
-    desktopEnvironment.init();
-};
+window.onload = desktopEnvironment.init();
