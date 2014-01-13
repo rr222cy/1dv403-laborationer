@@ -61,7 +61,7 @@ var desktopEnvironment = {
             modalBox.appendChild(modalFooter);
             // Lägger till boxen i container-diven
             containerDiv.appendChild(modalBox);            
-            modalBoxContent.innerHTML = "Testar fönsterhanteraren.";
+            modalBoxContent.innerHTML = "Testar fönsterhanteraren.<p>Test</p><p>Test</p><p>Test</p><p>Test</p><p>Test</p><p>Test</p><p>Test</p><p>Test</p><p>Test</p><p>Test</p><p>Test</p>";
             
             // Vid klick på kryss stängs aktivt fönster.
             document.getElementById("closeGallery").onclick = function()
