@@ -40,10 +40,10 @@ var desktopEnvironment = {
             modalFooter.className = "popupWindowFooter";
             modalFooter.id = "popupWindowFooter";
             modalHeader.className = "popupWindowHeader";
-            modalHeaderIcon.src = "pics/gallery.png";
+            modalHeaderIcon.src = "pics/gallery-small.png";
             modalHeaderIcon.className = "popupWindowIcon";
             modalHeaderSpan.className = "popupWindowText";
-            modalHeaderCloseIcon.src = "pics/close.png";
+            modalHeaderCloseIcon.src = "pics/close-small.png";
             modalHeaderCloseIcon.className = "popupWindowClose";
             
             modalHeaderCloseIconLink.href = "#";
@@ -100,7 +100,7 @@ var desktopEnvironment = {
                 }
                 
                 // Här skjuter jag in min egen standardbakgrund, så man kan gå tillbaka till den om man vill.
-                document.getElementById("popupWindowContent").innerHTML += '<div class="galleryPic" style="width:'+picThumbMaxWidth+'px; height:'+picThumbMaxHeight+'px;"><a id="galleryPic'+i+'" href="pics/standardBackground.jpg"><img width="'+picThumbMaxWidth+'" height="'+picThumbMaxHeight+'" src="pics/standardBackground.jpg" /></a></div>';
+                document.getElementById("popupWindowContent").innerHTML += '<div class="galleryPic" style="width:'+picThumbMaxWidth+'px; height:'+picThumbMaxHeight+'px;"><a id="galleryPic'+i+'" href="pics/standardBackground.jpg"><img width="'+picThumbMaxWidth+'" height="'+picThumbMaxHeight+'" src="pics/standardBackground-small.jpg" /></a></div>';
                 
                 // Letar på alla länkar under mina galleribildsdivar och sätter onclickevent på dem.
                 var galleryLinks = document.querySelectorAll(".galleryPic a");
