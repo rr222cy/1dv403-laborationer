@@ -7,6 +7,7 @@ article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, 
 
 /* General settings */
 
+
 html {
     position: relative;
     min-height: 100%;
@@ -101,7 +102,7 @@ footer {
     min-width: 450px;
     max-width: 450px;
     */
-    width: 400px;
+    width: 370px;
     height: 450px;
     background-color: #282828;    
     -webkit-box-shadow: 5px 5px 5px 2px #141414;
@@ -124,7 +125,7 @@ footer {
     padding: 10px;;
     margin-bottom: 0px;
     color: #000000;
-    background-color: #ffffff;
+    background-color: #e1e1e1;
 }
 
 .popupWindowHeader {
@@ -183,6 +184,9 @@ footer {
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
+    -webkit-animation-name: FadeIn;
+    -webkit-animation-timing-function: ease-in;
+    -webkit-animation-duration: 0.3s;
 }
 
 /* Settings for tooltips */
