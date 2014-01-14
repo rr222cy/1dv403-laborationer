@@ -17,9 +17,28 @@ var Memory = {
     cols: 4,
     rows: 4,    
     // Referens till tabellen vi vill lägga brickorna (rader/kolumner) i
-    gameTable: document.getElementById("gameTable1"),
+    gameTable: "",
     
     init:function()
+    {
+        var mainContainer = document.querySelector("main");
+        
+        mainContainer.innerHTML = '<h2>Välj storlek på memoryt</h2><p class="memoryMessageStyle"><select id="boardSize"><option value="" disabled selected style="display:none;">Välj här</option><option value="2,2">2x2</option><option value="3,2">3x2</option><option value="4,2">4x2</option><option value="4,3">4x3</option><option value="4,4">4x4</option></select></p>';
+        var selectBoardSize = document.getElementById("boardSize");
+        selectBoardSize.onchange = function()
+        {
+            // Hämtar värden från selectrutan, nedan sätts rätt värde in för kolumn/rad.
+            var values = selectBoardSize.options[selectBoardSize.selectedIndex].value;
+            Memory.cols = values[0];
+            Memory.rows = values[2];
+            mainContainer.innerHTML = '<table id="gameTable1" class="gameTableStyle"></table><p id="memoryMessage1" class="memoryMessageStyle"></p><p class="memoryButtons"><input type="button" value="Börja om" id="restartGame1"><input type="button" value="Ändra brädesstorlek" id="changeBoardSize"></p>';
+            Memory.gameTable = document.getElementById("gameTable1");
+            Memory.initBoard();
+            Memory.memoryMessage("Välkommen, kör igång!");
+        };
+    },
+    
+    initBoard:function()
     {
         // Slumpar fram brickor genom RandomGenerator och skickar sedan in detta i bricksArray[]
         Memory.bricksArray = RandomGenerator.getPictureArray(Memory.cols, Memory.rows);
@@ -94,16 +113,14 @@ var Memory = {
                         var now = new Date();
                         Memory.memoryMessage("Grattis, du klarade memoryt på " + Math.round((now.getTime() / 1000) - (Memory.gameTimer.getTime() / 1000)) + " sekunder och " + Memory.bricksGuesses + " försök!");
                     }  
-                }
-                
+                }                
                 else
                 {
                     // Här sker en timeout på innan funktionen för att vända tillbaka brickorna anropas.
                     setTimeout(function() {
                         flipBack();
                     }, 700);                    
-                }
-                
+                }              
             }
         }
         
@@ -147,6 +164,17 @@ var Memory = {
                     Memory.gameTable.innerHTML = "";
                     Memory.memoryMessage("");
                     Memory.gameTimer = 0;
+                    Memory.initBoard();
+                }, true);
+            
+            document.getElementById("changeBoardSize").addEventListener('click',function(){
+                    Memory.bricksArray.length = 0;
+                    Memory.bricksFlipped.length = 0;
+                    Memory.bricksGuesses = 0;
+                    Memory.bricksPair = 0;
+                    Memory.gameTable.innerHTML = "";
+                    Memory.memoryMessage("");
+                    Memory.gameTimer = 0;
                     Memory.init();
                 }, true);
         }
@@ -160,7 +188,4 @@ var Memory = {
     
 };
 
-window.onload = function () {
-    Memory.init();
-    Memory.memoryMessage("Välkommen, kör igång!");
-};
+window.onload =  Memory.init();

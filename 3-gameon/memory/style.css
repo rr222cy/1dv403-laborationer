@@ -117,3 +117,7 @@ th, thead, tfoot
     text-align: center;
     margin-top: 20px;
 }
+
+.memoryButtons {
+    margin-top: 70px;
+}
