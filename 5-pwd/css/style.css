@@ -71,12 +71,6 @@ main {
    width: 100%; 
 }
 
-section {
-}
-
-footer {
-}
-
 /* Settings for windows in the desktop environment */
 
 @-webkit-keyframes FadeIn {
@@ -119,7 +113,7 @@ footer {
 }
 
 .popupWindowContent {
-    height: 368px;
+    height: 372px;
     overflow: auto;
     overflow-x: hidden;
     padding: 10px;;
