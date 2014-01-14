@@ -102,7 +102,7 @@ footer {
     max-width: 450px;
     */
     width: 400px;
-    height: 350px;
+    height: 450px;
     background-color: #282828;    
     -webkit-box-shadow: 5px 5px 5px 2px #141414;
     box-shadow: 5px 5px 5px 2px #141414;
@@ -118,10 +118,10 @@ footer {
 }
 
 .popupWindowContent {
-    height: 278px;
+    height: 368px;
     overflow: auto;
     overflow-x: hidden;
-    padding: 1%;
+    padding: 10px;;
     margin-bottom: 0px;
     color: #000000;
     background-color: #ffffff;
@@ -171,6 +171,18 @@ footer {
     width: 16px;
     height: 16px;
     float: right;
+}
+
+.galleryPic {
+    background-color: #282828;
+    padding: 8px;
+    margin-right: 20px;
+    margin-bottom: 25px;
+    text-align: center;
+    float: left;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
 }
 
 /* Settings for tooltips */

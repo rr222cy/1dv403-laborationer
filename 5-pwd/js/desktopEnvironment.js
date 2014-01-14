@@ -3,8 +3,7 @@
 
 var desktopEnvironment = {
     init:function()
-    {
-        
+    {        
         document.getElementById("galleryLink").onclick = function()
         {            
             desktopEnvironment.showWindow();            
@@ -17,6 +16,7 @@ var desktopEnvironment = {
     {   
         var containerDiv = document.getElementById("container");
         
+        // Kollar om fönstret redan finns, om ja, så raderas det, annars renderas.
         if(document.getElementById("popupWindow"))
         {
             containerDiv.removeChild(document.getElementById("popupWindow"));
@@ -55,15 +55,12 @@ var desktopEnvironment = {
             modalHeader.appendChild(modalHeaderSpan);
             modalHeaderCloseIconLink.appendChild(modalHeaderCloseIcon);
             modalHeader.appendChild(modalHeaderCloseIconLink);
-            // Lägger till headern i fönstret
             modalBox.appendChild(modalHeader);
-            // Lägger till content i boxen
             modalBox.appendChild(modalBoxContent);
-            // Lägger till footer i boxen
             modalFooter.appendChild(document.createTextNode("Laddar..."));
             modalBox.appendChild(modalFooter);
-            // Lägger till boxen i container-diven
-            containerDiv.appendChild(modalBox);            
+            containerDiv.appendChild(modalBox);
+            
             // Vid klick på kryss stängs aktivt fönster.
             document.getElementById("closeGallery").onclick = function()
             {
@@ -71,7 +68,6 @@ var desktopEnvironment = {
                 return false;
             };
             
-            // Visar en laddningsgif fram till att AJAX-anropet ersätter den.
             document.getElementById("popupWindowFooter").innerHTML = '<img src="pics/ajax-loader-white.gif" width="12" height="12"/>&nbsp;&nbsp;Laddar...';
             
             // Efter att fönstret renderats fram sker ett AJAX-anrop mot angiven URL.
@@ -79,24 +75,48 @@ var desktopEnvironment = {
                 var responseData = JSON.parse(data);
                 var picThumbWidth = [],
                     picThumbHeight = [],
-                    picThumbURL = [];
+                    picThumbMaxWidth = 0,
+                    picThumbMaxHeight = 0,
+                    i = 0;
                 
-                for(var i = 0; i < responseData.length; i++)
+                // Loopar ut alla bilders bredd och höjd och skickar in dem i nya arrayer.
+                for(i = 0; i < responseData.length; i++)
                 {
                     picThumbHeight[i] = responseData[i].thumbHeight;
                     picThumbWidth[i] = responseData[i].thumbWidth;
                 }
-                                
+                
+                // Beräknar här genom Math-funktionen vilken bild i arrayen som är störst (vilket tal som är störtst i arrayen och skickar in det i min variabel).
+                picThumbMaxWidth = Math.max.apply(Math, picThumbWidth);
+                picThumbMaxHeight = Math.max.apply(Math, picThumbHeight);
+                
+                // Ser till att laddningsanimationen raderas, nu ska content fyllas.
                 document.getElementById("popupWindowFooter").innerHTML = "";
                 
-                for(var i = 0; i < responseData.length; i++)
+                // Här loopas alla objekt ut, genom innerHTML skjuts bilderna in i DOM:en efter varv.
+                for(i = 0; i < responseData.length; i++)
                 {
-                    document.getElementById("popupWindowContent").innerHTML += '<a href="#"><img src="'+responseData[i].thumbURL+'" class="galleryPic" /></a>';
+                    document.getElementById("popupWindowContent").innerHTML += '<div class="galleryPic" style="width:'+picThumbMaxWidth+'px; height:'+picThumbMaxHeight+'px;"><a class="galleryPickd" href="'+responseData[i].URL+'"><img src="'+responseData[i].thumbURL+'" /></a></div>';
+                }
+                
+                // Här skjuter jag in min egen standardbakgrund, så man kan gå tillbaka till den om man vill.
+                document.getElementById("popupWindowContent").innerHTML += '<div class="galleryPic" style="width:'+picThumbMaxWidth+'px; height:'+picThumbMaxHeight+'px;"><a id="galleryPic'+i+'" href="pics/standardBackground.jpg"><img width="'+picThumbMaxWidth+'" height="'+picThumbMaxHeight+'" src="pics/standardBackground.jpg" /></a></div>';
+                
+                // Letar på alla länkar under mina galleribildsdivar och sätter onclickevent på dem.
+                var galleryLinks = document.querySelectorAll(".galleryPic a");
+                for(i=0; i < galleryLinks.length; i++)
+                {
+                    galleryLinks[i].onclick = function()
+                    {
+                        desktopEnvironment.changeBackground(this.href);
+                        return false;
+                    };
                 }
             });            
         }
     },
     
+    // Funktion för att byta PWD:ns bakgrund.
     changeBackground:function(backgroundImage)
     {
         document.body.style.background = "url(" + backgroundImage + ")";
