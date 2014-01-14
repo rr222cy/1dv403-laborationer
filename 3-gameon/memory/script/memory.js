@@ -21,7 +21,7 @@ var Memory = {
     
     init:function()
     {
-        var mainContainer = document.querySelector("main");
+        var mainContainer = document.querySelector("#gameBoard1");
         
         mainContainer.innerHTML = '<h2>Välj storlek på memoryt</h2><p class="memoryMessageStyle"><select id="boardSize"><option value="" disabled selected style="display:none;">Välj här</option><option value="2,2">2x2</option><option value="3,2">3x2</option><option value="4,2">4x2</option><option value="4,3">4x3</option><option value="4,4">4x4</option></select></p>';
         var selectBoardSize = document.getElementById("boardSize");
@@ -34,7 +34,7 @@ var Memory = {
             mainContainer.innerHTML = '<table id="gameTable1" class="gameTableStyle"></table><p id="memoryMessage1" class="memoryMessageStyle"></p><p class="memoryButtons"><input type="button" value="Börja om" id="restartGame1"><input type="button" value="Ändra brädesstorlek" id="changeBoardSize"></p>';
             Memory.gameTable = document.getElementById("gameTable1");
             Memory.initBoard();
-            Memory.memoryMessage("Välkommen, kör igång!");
+            Memory.memoryMessage("Släpp sargen, kör igång!");
         };
     },
     
