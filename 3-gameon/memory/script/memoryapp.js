@@ -10,7 +10,9 @@ var Memory = {
     // Håller reda på antalet gissningar.
     bricksGuesses: 0,
     // Håller reda på antalet par.
-    bricksPair: 0,    
+    bricksPair: 0,
+    // Timer för att ta tid på spelet.
+    gameTimer: 0,
     // Här ställer vi in hur många kolumner och rader spelet skall ha, satt till 2x2 här.
     cols: 4,
     rows: 4,    
@@ -37,6 +39,13 @@ var Memory = {
                 k++;
             }
         }
+        
+        Memory.gameTable.onclick = function ()
+        {
+            Memory.memoryMessage("Spelet är igång!");
+            Memory.gameTimer = new Date();
+            this.onclick = null;
+        };
         
         // Funktion för att tillämpa en closure och verkligen få ut önskat värde ur varje iteration ovan.
         function createBrick(nr)
@@ -65,7 +74,7 @@ var Memory = {
             var justFlipped = document.querySelectorAll(".justFlipped");
             
             // Kollar här om vi fått 2 brickor klickade på, om ja så matchas de mot varandra.
-            if(Memory.bricksFlipped.length >= 2)
+            if(Memory.bricksFlipped.length > 1)
             {
                 // Kontrollerar om bricka 1 matchar bricka 2.
                 if(Memory.bricksFlipped[0] === Memory.bricksFlipped[1])
@@ -77,12 +86,16 @@ var Memory = {
                     Memory.bricksPair += 1;
                     Memory.bricksGuesses += 1;
                     
+                    Memory.memoryMessage("Du har hittat " + Memory.bricksPair + " av " + Memory.cols * Memory.rows / 2 + " par hittills!");
+                    
                     // Kollar om spelet är slut, antal par blir alltid hälften av rader * kolumner.
                     if(Memory.bricksPair === (Memory.cols * Memory.rows / 2))
                     {
-                        Memory.memoryMessage("Grattis, du klarade memoryt på " + Memory.bricksGuesses + " försök!");
-                    }
+                        var now = new Date();
+                        Memory.memoryMessage("Grattis, du klarade memoryt på " + Math.round((now.getTime() / 1000) - (Memory.gameTimer.getTime() / 1000)) + " sekunder och " + Memory.bricksGuesses + " försök!");
+                    }  
                 }
+                
                 else
                 {
                     // Här sker en timeout på innan funktionen för att vända tillbaka brickorna anropas.
@@ -90,6 +103,7 @@ var Memory = {
                         flipBack();
                     }, 700);                    
                 }
+                
             }
         }
         
@@ -132,6 +146,7 @@ var Memory = {
                     Memory.bricksPair = 0;
                     Memory.gameTable.innerHTML = "";
                     Memory.memoryMessage("");
+                    Memory.gameTimer = 0;
                     Memory.init();
                 }, true);
         }
@@ -147,4 +162,5 @@ var Memory = {
 
 window.onload = function () {
     Memory.init();
+    Memory.memoryMessage("Välkommen, kör igång!");
 };
